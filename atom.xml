@@ -110,7 +110,7 @@
     <link href="http://ningquec.github.io/2015/07/10/ShellProgrammingSkills/"/>
     <id>http://ningquec.github.io/2015/07/10/ShellProgrammingSkills/</id>
     <published>2015-07-10T13:21:27.000Z</published>
-    <updated>2015-07-22T07:39:43.100Z</updated>
+    <updated>2015-07-22T07:46:26.558Z</updated>
     <content type="html"><![CDATA[<p>总结的一些shell小技巧，时时更新中。。</p>
 <p>（1）使用&amp;&amp;和||的短路特性，假如传递了参数，PARAM=参数，否则给PARAM赋一个值。（简化if else）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[[ -n &#34;$1&#34; ]] &#38;&#38; PARAM=$1 || PARAM=value</span><br></pre></td></tr></table></figure></p>
 <p>（2）测试上一个命令的退出状态，将错误写入log文件。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[ $? &#8211;gt 0 ] &#38;&#38; echo &#39;Something Wrong, please investigate!&#39; &#62;&#62; $&#123;LOG_FILE&#125;</span><br></pre></td></tr></table></figure></p>
@@ -302,7 +302,7 @@
     <link href="http://ningquec.github.io/2015/06/26/Grep&RE/"/>
     <id>http://ningquec.github.io/2015/06/26/Grep&RE/</id>
     <published>2015-06-26T12:22:58.000Z</published>
-    <updated>2015-06-27T03:24:26.286Z</updated>
+    <updated>2015-07-22T07:45:54.112Z</updated>
     <content type="html"><![CDATA[<p><a href="http://tyroneli.com/2015/06/16/grep-%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/" target="_blank" rel="external">上回</a>说到grep与正则表达式关系紧密，今天来详细的谈一谈。</p>
 <h2 id="一、简介">一、简介</h2><p>正则表达式，让人不明觉厉，望而却步。但实际上它就相当于数学里的九九乘法表，背会很难，之后做乘法就很快了。<br>正则表达式也是这样的工具，看起来很难，背会了之后大有帮助。乘法表建立了乘法的基础规则，而正则表达式建立了一系列语法的规则。它是用来匹配符合某种语法的字符串，从而可以对这些筛选出来的字符串进行处理。</p>
 <p>所以天然的，在Linux中，grep命令经常与正则表达式结合起来执行一些模糊查询或者指向性查询。<br>比如一些常见的：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ll | grep -E &#34;*.txt&#34;  &#10;    #&#21015;&#20986;&#24403;&#21069;&#36335;&#24452;&#19979;&#30340;txt&#25991;&#20214;&#10;    #-E&#36873;&#39033;&#34920;&#31034;&#20351;&#29992;&#25193;&#23637;&#30340;&#27491;&#21017;&#34920;&#36798;&#24335;&#65292;grep -E&#30456;&#24403;&#20110;egrep&#10;    #&#34;*&#34;&#23601;&#26159;&#19968;&#31181;&#27491;&#21017;&#34920;&#36798;&#24335;&#30340;&#20803;&#23383;&#31526;</span><br></pre></td></tr></table></figure></p>
