@@ -110,7 +110,7 @@
     <link href="http://ningquec.github.io/2015/07/10/ShellProgrammingSkills/"/>
     <id>http://ningquec.github.io/2015/07/10/ShellProgrammingSkills/</id>
     <published>2015-07-10T13:21:27.000Z</published>
-    <updated>2015-07-22T07:35:37.606Z</updated>
+    <updated>2015-07-22T07:39:43.100Z</updated>
     <content type="html"><![CDATA[<p>总结的一些shell小技巧，时时更新中。。</p>
 <p>（1）使用&amp;&amp;和||的短路特性，假如传递了参数，PARAM=参数，否则给PARAM赋一个值。（简化if else）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[[ -n &#34;$1&#34; ]] &#38;&#38; PARAM=$1 || PARAM=value</span><br></pre></td></tr></table></figure></p>
 <p>（2）测试上一个命令的退出状态，将错误写入log文件。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[ $? &#8211;gt 0 ] &#38;&#38; echo &#39;Something Wrong, please investigate!&#39; &#62;&#62; $&#123;LOG_FILE&#125;</span><br></pre></td></tr></table></figure></p>
