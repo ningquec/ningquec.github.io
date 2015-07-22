@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="baidu-site-verification" content="jdIa3b5GkY" />
+  
+  <title>grep 命令详解 | Tyrone Li的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="一、简介grep: Gloabal Search Regular Expression and Print out the line，意为全局搜索正则表达式并打印文本行。所以1.grep是一个强大的文本搜索工具 2.grep与正则表达式联系紧密，之后也会从这两个大的方面来详细介绍。grep命令的基本语法如下：1grep [options] pattern [file...]
+[options]表示">
+<meta property="og:type" content="article">
+<meta property="og:title" content="grep 命令详解">
+<meta property="og:url" content="http://ningquec.github.io/2015/06/16/CommandGrep/index.html">
+<meta property="og:site_name" content="Tyrone Li的博客">
+<meta property="og:description" content="一、简介grep: Gloabal Search Regular Expression and Print out the line，意为全局搜索正则表达式并打印文本行。所以1.grep是一个强大的文本搜索工具 2.grep与正则表达式联系紧密，之后也会从这两个大的方面来详细介绍。grep命令的基本语法如下：1grep [options] pattern [file...]
+[options]表示">
+<meta property="og:updated_time" content="2015-07-04T09:14:47.677Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="grep 命令详解">
+<meta name="twitter:description" content="一、简介grep: Gloabal Search Regular Expression and Print out the line，意为全局搜索正则表达式并打印文本行。所以1.grep是一个强大的文本搜索工具 2.grep与正则表达式联系紧密，之后也会从这两个大的方面来详细介绍。grep命令的基本语法如下：1grep [options] pattern [file...]
+[options]表示">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img lazy-src="http://7xjnnt.com1.z0.glb.clouddn.com/tyrone博客头像.png" class="js-avatar">
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Tyrone</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">天天向上</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="http://github.com/ningquec" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/数据结构/" style="font-size: 15px;">数据结构</a> <a href="/tags/树/" style="font-size: 15px;">树</a> <a href="/tags/正则表达式/" style="font-size: 10px;">正则表达式</a> <a href="/tags/集合类/" style="font-size: 10px;">集合类</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">天天向上</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Tyrone</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="http://7xjnnt.com1.z0.glb.clouddn.com/tyrone博客头像.png" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Tyrone</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">天天向上</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="http://github.com/ningquec" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-CommandGrep" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/06/16/CommandGrep/" class="article-date">
+  	<time datetime="2015-06-16T12:02:13.000Z" itemprop="datePublished">2015-06-16</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      grep 命令详解
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、简介">一、简介</h2><p>grep: Gloabal Search Regular Expression and Print out the line，意为全局搜索正则表达式并打印文本行。所以<code>1.grep是一个强大的文本搜索工具</code> <code>2.grep与正则表达式联系紧密</code>，之后也会从这两个大的方面来详细介绍。grep命令的基本语法如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep [options] pattern [file...]</span><br></pre></td></tr></table></figure></p>
+<p>[options]表示选项，具体的命令选项见下表。pattern表示要匹配的模式（包括目标字符串、变量或者正则表达式），file表示要查询的文件名，可以是一个或者多个。pattern后面所有的字符串参数都会被理解为文件名。<br><a id="more"></a></p>
+<p><table><tr><th>选项</th><th>说明</th></tr><tr><td>-c</td><td>只打印匹配的文本行的行数，不显示匹配的内容</td></tr><tr><td>-i</td><td>匹配时忽略字母的大小写</td></tr><tr><td>-h</td><td>当搜索多个文件时，不显示匹配文件名前缀</td></tr><tr><td>-n</td><td>列出所有的匹配的文本行，并显示行号</td></tr><tr><td>-l</td><td>只列出含有匹配的文本行的文件的文件名，而不显示具体的匹配内容</td></tr><tr><td>-s</td><td>不显示关于不存在或者无法读取文件的错误信息</td></tr><tr><td>-v</td><td>只显示不匹配的文本行</td></tr><tr><td>-w</td><td>匹配整个单词</td></tr><tr><td>-x</td><td>匹配整个文本行</td></tr><tr><td>-r</td><td>递归搜索，搜索当前目录和子目录</td></tr><tr><td>-q</td><td>禁止输出任何匹配结果，而是以退出码的形式表示搜索是否成功，其中0表示找到了匹配的文本行</td></tr><tr><td>-b</td><td>打印匹配的文本行到文件头的偏移量，以字节为单位</td></tr><tr><td>-E</td><td>支持扩展正则表达式</td></tr><tr><td>-P</td><td>支持Perl正则表达式</td></tr><tr><td>-F</td><td>不支持正则表达式，将模式按照字面意思匹配</td></tr></table></p>
+<h2 id="二、grep简单应用场景">二、grep简单应用场景</h2><p>首先介绍一下我的实验环境，在/home/tyrone下建立3个简单的txt文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#----------------------/home/tyrone/text1.txt---------------------&#10;hello world&#10;mailx&#10;uuen&#10;letitia&#10;#----------------------/home/tyrone/text2.txt---------------------&#10;hello world,this is for grep test &#10;#----------------------/home/tyrone/text3.txt---------------------&#10;hello world&#10;tyrone</span><br></pre></td></tr></table></figure></p>
+<p>（1）多文件查询，file之间用空格隔开<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep -i &#34;hello world&#34; test1.txt test2.txt&#10;&#10;#&#36755;&#20986;&#32467;&#26524;&#10;test1.txt:hello world&#10;test2.txt:hello world,this is for grep test</span><br></pre></td></tr></table></figure></p>
+<p>（2）多模式匹配，模式之间为“逻辑或”的关系，匹配任意一个<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#&#26041;&#27861;1&#65306;&#20351;&#29992;-e&#36873;&#39033;&#10;grep -e &#34;hello world&#34; -e &#34;mailx&#34; -r /home/tyrone&#10;&#10;#&#26041;&#27861;2&#65306;&#20351;&#29992;&#27491;&#21017;&#34920;&#36798;&#24335;&#65292;-E&#10;grep -E &#34;hello world|mailx&#34; -r /home/tyrone&#10;&#10;#&#26041;&#27861;3&#65306;&#20351;&#29992;&#27491;&#21017;&#34920;&#36798;&#24335;&#65292;egrep&#65292;&#21516;grep -E&#31561;&#25928;&#10;egrep &#34;hello world|mailx&#34; -r /home/tyrone</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#&#36755;&#20986;&#32467;&#26524;&#22343;&#30456;&#21516;&#65306;&#10;/home/tyrone/test1.txt:hello world&#10;/home/tyrone/test1.txt:mailx&#10;/home/tyrone/test2.txt:hello world,this is for grep test&#10;/home/tyrone/test3.txt:hello world</span><br></pre></td></tr></table></figure>
+<p>（3）多模式匹配，模式之间为“逻辑与”的关系，匹配所有模式。<br>这个问题我查阅了很多方法，并逐一试验了一下。基本思想大致相同：先匹配一个模式，然后grep下面一个模式，将前一次grep的结果作为要查询文件路径依次向后传递。<code>注意：前一次grep的结果必须加上-l选项，否则会把匹配成功的文件内容作为要查询的文件名向后传递</code>。我希望做到的是能够显示出同时包含模式的文件，并且跟随显示匹配每个模式的内容。可惜我现在找到的方法都仅仅能够显示匹配最后一个模式的内容。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#&#26041;&#27861;1&#65306;&#27604;&#36739;&#31528;&#65292;&#23558;&#20854;&#25353;&#19968;&#27425;&#30340;&#32467;&#26524;&#37325;&#23450;&#21521;&#21040;&#19968;&#20010;&#25991;&#20214;&#65292;&#28982;&#21518;xargs grep&#26469;&#20381;&#27425;&#35835;&#21462;&#12290;&#10;grep -i &#34;hello world&#34; -rl /home/tyrone &#62;&#62; reslut.txt&#10;cat result.txt | xargs grep -i &#34;mailx&#34; &#10;&#10;#&#36755;&#20986;&#32467;&#26524;&#10;/home/tyrone/test1.txt:mailx</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#&#26041;&#27861;2&#65306;&#30452;&#25509;&#21033;&#29992;&#31649;&#36947;&#10;grep -i &#34;hello world&#34; -rl /home/tyrone | xargs grep -i &#34;mailx&#34;&#10;&#10;#&#36755;&#20986;&#32467;&#26524;&#10;/home/tyrone/test1.txt:mailx</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#&#26041;&#27861;3&#65306;&#20351;&#29992;find&#65292;&#36866;&#21512;&#20110;&#38656;&#35201;&#28789;&#27963;&#21028;&#26029;&#26465;&#20214;&#30340;&#22330;&#26223;&#12290;&#20363;&#22914;&#26597;&#25214;&#25351;&#23450;&#36335;&#24452;&#19979;&#65292;&#21516;&#26102;&#21305;&#37197;&#22810;&#20010;&#27169;&#24335;&#30340;txt&#25991;&#20214;&#12290;&#27880;&#24847;&#65306;&#26412;&#20363;&#20013;&#8220;mailx&#8221;&#21518;&#38754;&#30340;&#21629;&#20196;&#24517;&#39035;&#21152;&#19978;&#21453;&#24341;&#21495; ` &#65292;&#21542;&#21017;&#20250;&#34987;&#24403;&#20316;&#35201;&#26597;&#35810;&#30340;&#25991;&#20214;&#21517;&#12290;&#10;grep -i &#34;mailx&#34; `find /home/tyrone -type f -name &#34;*.txt&#34; -exec grep -l &#34;hello world&#34;  &#123;&#125; \;`&#10;&#10;#&#36755;&#20986;&#32467;&#26524;&#10;/home/tyrone/test1.txt:mailx</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#&#26041;&#27861;4:&#21516;3&#10;find /home/tyrone -name &#34;*.txt&#34; -exec grep -l &#34;hello world&#34; &#123;&#125; \; | xargs grep -i &#34;mailx&#34;&#10;&#10;#&#36755;&#20986;&#32467;&#26524;&#10;/home/tyrone/test1.txt:mailx</span><br></pre></td></tr></table></figure>
+<p>最后不得不感慨一下linux命令的组合方式，能像积木一样堆积出无穷的组合，是时候展现真正的想象力了。。。<br>（4）查找指定用户的进程<br>ps是查看当前进程的指令，e表示所有进程，f表示全格式。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -ef | grep &#34;tyrone&#34;&#10;&#10;#&#36755;&#20986;&#32467;&#26524;&#10;root      27200  1827  0 Jun15 ?        00:00:00 sshd: tyrone [priv]&#10;tyrone    27434 27433  0 Jun15 pts/50   00:00:00 -bash&#10;tyrone    43316 27434  2 02:14 pts/50   00:00:00 ps -ef&#10;tyrone    43317 27434  0 02:14 pts/50   00:00:00 grep tyrone</span><br></pre></td></tr></table></figure></p>
+<h2 id="三、团结就是力量">三、团结就是力量</h2><p>现在要搞一个脚本把前面总结的命令一锅炖了。先搜索同时匹配多个模式的文件，把它们先备份之后，替换目标字符串：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#----------------------/home/tyrone/myshell.ksh---------------------&#10;#! /bin/ksh&#10;&#10;grep &#34;hello world&#34; -rl /home/tyrone | xargs grep -l &#34;mailx&#34; &#62; /home/tyrone/result5.txt&#10;cat result5.txt | while read line&#10;do&#10;    cp $&#123;line&#125; $&#123;line&#125;.bak20150616&#10;    sed -i &#34;s/hello world/letitia/g&#34; `grep &#34;hello world&#34; -rl $&#123;line&#125;`&#10;done</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#&#36755;&#20986;&#32467;&#26524;&#65306;&#21482;&#26377;test1.txt&#28385;&#36275;&#26465;&#20214;&#65292;&#23558;&#34;hello world&#34;&#26367;&#25442;&#25104;&#20102;&#34;letitia&#34;&#10;#&#21734;&#23545;&#20102;&#12290;&#12290;&#36824;&#26377;&#25105;&#30340;shell&#25991;&#20214;&#20063;&#21516;&#26102;&#21253;&#21547;&#20102;&#36825;&#20004;&#20010;&#27169;&#24335;&#65292;&#21487;&#20197;&#36890;&#36807;find&#38480;&#23450;&#25991;&#20214;&#21518;&#32512;&#65292;&#19981;&#34920;&#10;#----------------------/home/tyrone/text1.txt---------------------&#10;letitia&#10;mailx&#10;uuen&#10;letitia&#10;#----------------------/home/tyrone/text2.txt---------------------&#10;hello world,this is for grep test &#10;#----------------------/home/tyrone/text3.txt---------------------&#10;hello world&#10;tyrone&#10;#----------------/home/tyrone/text1.txt.bak20150616---------------&#10;hello world&#10;mailx&#10;uuen&#10;letitia</span><br></pre></td></tr></table></figure>
+<h2 id="四、下回分解">四、下回分解</h2><p>grep与正则表达式的故事</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/06/22/DataStructureBST/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          树（一）：二叉查找树
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/06/13/HashTable&BloomFilter/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">hash表与bloom filter</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="CommandGrep" data-title="grep 命令详解" data-url="http://ningquec.github.io/2015/06/16/CommandGrep/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2015 Tyrone
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/mobile.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+<! -- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+  </div>
+</body>
+</html>

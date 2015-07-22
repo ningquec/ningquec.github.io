@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="baidu-site-verification" content="jdIa3b5GkY" />
+  
+  <title>sed命令详解 | Tyrone Li的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="一、简介sed命令是一个很强大的文本编辑器，可以对来自文件、以及标准输入的文本进行编辑。
+执行时，sed会从文件或者标准输入中读取一行，将其复制到缓冲区，对文本编辑完成之后，读取下一行直到所有的文本行都编辑完毕。所以sed命令处理时只会改变缓冲区中文本的副本，如果想要直接编辑原文件，可以使用-i选项或者将结果重定向到新的文件中。
+sed命令的基本语法如下：1sed [options] comman">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sed命令详解">
+<meta property="og:url" content="http://ningquec.github.io/2015/07/02/LinuxCommandSed/index.html">
+<meta property="og:site_name" content="Tyrone Li的博客">
+<meta property="og:description" content="一、简介sed命令是一个很强大的文本编辑器，可以对来自文件、以及标准输入的文本进行编辑。
+执行时，sed会从文件或者标准输入中读取一行，将其复制到缓冲区，对文本编辑完成之后，读取下一行直到所有的文本行都编辑完毕。所以sed命令处理时只会改变缓冲区中文本的副本，如果想要直接编辑原文件，可以使用-i选项或者将结果重定向到新的文件中。
+sed命令的基本语法如下：1sed [options] comman">
+<meta property="og:updated_time" content="2015-07-02T10:56:44.217Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="sed命令详解">
+<meta name="twitter:description" content="一、简介sed命令是一个很强大的文本编辑器，可以对来自文件、以及标准输入的文本进行编辑。
+执行时，sed会从文件或者标准输入中读取一行，将其复制到缓冲区，对文本编辑完成之后，读取下一行直到所有的文本行都编辑完毕。所以sed命令处理时只会改变缓冲区中文本的副本，如果想要直接编辑原文件，可以使用-i选项或者将结果重定向到新的文件中。
+sed命令的基本语法如下：1sed [options] comman">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img lazy-src="http://7xjnnt.com1.z0.glb.clouddn.com/tyrone博客头像.png" class="js-avatar">
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Tyrone</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">天天向上</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="http://github.com/ningquec" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/数据结构/" style="font-size: 15px;">数据结构</a> <a href="/tags/树/" style="font-size: 15px;">树</a> <a href="/tags/正则表达式/" style="font-size: 10px;">正则表达式</a> <a href="/tags/集合类/" style="font-size: 10px;">集合类</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">天天向上</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Tyrone</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="http://7xjnnt.com1.z0.glb.clouddn.com/tyrone博客头像.png" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Tyrone</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">天天向上</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="http://github.com/ningquec" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-LinuxCommandSed" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/07/02/LinuxCommandSed/" class="article-date">
+  	<time datetime="2015-07-02T10:51:48.000Z" itemprop="datePublished">2015-07-02</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      sed命令详解
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、简介">一、简介</h2><p>sed命令是一个很强大的文本编辑器，可以对来自文件、以及标准输入的文本进行编辑。</p>
+<p>执行时，sed会从文件或者标准输入中读取一行，将其复制到缓冲区，对文本编辑完成之后，读取下一行直到所有的文本行都编辑完毕。<br>所以sed命令处理时只会改变缓冲区中文本的副本，如果想要直接编辑原文件，可以使用-i选项或者将结果重定向到新的文件中。</p>
+<p>sed命令的基本语法如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed [options] commands [inputfile...]</span><br></pre></td></tr></table></figure></p>
+<p>options表示sed命令的一些选项，常见的选项如下表：<br><a id="more"></a></p>
+<p><table><tr><th>选项名</th><th>作用</th></tr><tr><td>-n</td><td>取消默认输出</td></tr><tr><td>-e</td><td>多点编辑，可移执行多个子命令</td></tr><tr><td>-f</td><td>从脚本文件中读取命令（sed操作可以事先写入脚本，然后通过-f读取并执行）</td></tr><tr><td>-i</td><td>直接编辑原文件</td></tr><tr><td>-l</td><td>指定行的长度</td></tr><tr><td>-r</td><td>在脚本中使用扩展表达式</td></tr></table></p>
+<h2 id="二、应用场景">二、应用场景</h2><p>sed命令比较适用于大的文本文件，用普通文本编辑器难以胜任的情况。下面分别介绍直接打印、插入、删除、替换等编辑操作。<br>&nbsp;&nbsp;&nbsp;实验用文件内容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#===================test1.txt======================&#10;letitia&#10;mail&#10;uuencode&#10;1003605091&#10;01566</span><br></pre></td></tr></table></figure></p>
+<p>（1）行打印，输出缓冲区内容，使用sed的<code>p子命令</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed &#39;1,3 p&#39; test1.txt&#10;echo &#34;=====================&#34;&#10;sed -n &#39;1,3 p&#39; test1.txt&#10;&#10;#&#36755;&#20986;&#32467;&#26524;&#10;letitia&#10;letitia&#10;mail&#10;mail&#10;uuencode&#10;uuencode&#10;1003605091&#10;01566&#10;=====================&#10;letitia&#10;mail&#10;uuencode</span><br></pre></td></tr></table></figure></p>
+<p>p子命令代表print，可以打印出sed缓冲区内的内容。<br>sed命令中，直接采用数字代表某个特定的文本行：<code>&#39;1 p&#39;</code>代表打印第一行；<code>&#39;1,3 p&#39;</code>代表打印1到3行；特别的，最后一行的行号为$。</p>
+<p>观察输出结果，不使用-n选项时，sed命令把1到3行输出了两次。这是因为不使用-n时，sed首先读取一行，并默认将缓冲区内的文本输出出来，之后p子命令再次输出。使用-n时，默认输出取消，只有p子命令的输出结果。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -n &#39;/^ma/,5 p&#39; test1.txt&#10;&#10;#&#36755;&#20986;&#32467;&#26524;&#10;mail&#10;uuencode&#10;1003605091&#10;01566</span><br></pre></td></tr></table></figure></p>
+<p>sed命令支持正则表达式定位。语法为<code>/re/</code>，re表示正则表达式。<br>本例表示打印出从匹配正则表达式的地方到第5行，也就是从匹配以ma开头的文本行处开始。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -n &#39;1~2 p&#39; test1.txt&#10;&#10;#&#36755;&#20986;&#32467;&#26524;&#10;letitia&#10;uuencode&#10;01566</span><br></pre></td></tr></table></figure></p>
+<p><code>1~2</code>表示从第一行开始，行号递增2输出，即输出奇数行。语法格式为<code>first~step</code>。<br>（2）插入文本行，追加文本行<br>这两种情况很类似。插入文本使用<code>i子命令</code>，表示在指定位置前面插入文本；追加文本使用<code>a子命令</code>，表示在指定位置之后插入文本。观察一下两个的区别：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -n -e &#39;2 i insert&#39; -e &#39;1,4 p&#39; test1.txt &#10;&#10;#-e&#36873;&#39033;&#34920;&#31034;&#22810;&#20010;&#23376;&#21629;&#20196;&#65292;&#26412;&#20363;&#25191;&#34892;i&#23376;&#21629;&#20196;&#20043;&#21518;&#25191;&#34892;&#20102;p&#23376;&#21629;&#20196;&#10;#&#36755;&#20986;&#32467;&#26524;&#10;letitia&#10;insert&#10;mail&#10;uuencode&#10;1003605091</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -n -e &#39;2 a insert&#39; -e &#39;1,4 p&#39; test1.txt&#10;&#10;#&#36755;&#20986;&#32467;&#26524;&#10;letitia&#10;mail&#10;insert&#10;uuencode&#10;1003605091</span><br></pre></td></tr></table></figure>
+<p>（3）删除文本行，使用<code>d子命令</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -n -e &#39;2 d&#39; -e &#39;1,$ p&#39; test1.txt&#10;&#10;#&#36755;&#20986;&#32467;&#26524;&#10;letitia&#10;uuencode&#10;1003605091&#10;01566</span><br></pre></td></tr></table></figure></p>
+<p>（4）替换文本行，使用<code>c子命令</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -n -e &#39;2 c newmail&#39; -e &#39;1,$ p&#39; test1.txt&#10;&#10;#&#36755;&#20986;&#32467;&#26524;&#10;letitia&#10;newmail&#10;uuencode&#10;1003605091&#10;01566</span><br></pre></td></tr></table></figure></p>
+<p>【注】以上均未使用-i选项，所以更改的只是副本。<br><b>（5）替换指定文本，使用<code>s子命令</code></b><br>这一个命令实用性很广，并且灵活。语法也比之上面特别一些：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed &#39;&#20301;&#32622;&#21442;&#25968; s/pattern/replaced/[flag]&#39;</span><br></pre></td></tr></table></figure></p>
+<p>pattern为要替换的文本，支持正则表达式，replaced表示用来替换的一般字符串（不支持正则表达式）。<br>flag是替换标志，用来影响匹配替换的规则：</p>
+<p><table><tr><th>flag</th><th>用法</th></tr><tr><td>g</td><td>全局匹配，会替换文本行中所有匹配的字符串</td></tr><tr><td>十进制n</td><td>替换文本行中第n个匹配的字符串</td></tr><tr><td>p</td><td>替换第一个匹配的字符串，并且将缓冲区输出到标准输出</td></tr><tr><td>w</td><td>替换第一个匹配的字符串，并且将改动的行输出到磁盘文件中</td></tr><tr><td>缺省</td><td>替换第一个匹配的字符串</td></tr></table><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -n -e &#39;s/[0-9]\&#123;10\&#125;/miss letitia/g&#39; -e &#39;1,$ p&#39; test1.txt&#10;#&#123;&#125;&#35201;&#36716;&#20041;&#65292;&#22240;&#20026;&#27492;&#22788;&#20351;&#29992;&#30340;&#19981;&#26159;&#25193;&#23637;&#27491;&#21017;&#34920;&#36798;&#24335;&#10;&#10;#&#36755;&#20986;&#32467;&#26524;&#10;letitia&#10;mail&#10;uuencode&#10;miss letitia&#10;01566</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -n -e &#39;1,/^ma/ s/l/L/g&#39; -e &#39;1,$ p&#39; test1.txt&#10;&#10;#&#36755;&#20986;&#32467;&#26524;&#10;Letitia&#10;maiL&#10;uuencode&#10;miss letitia&#10;01566&#10;#&#21487;&#20197;&#30475;&#21040;&#65292;&#26412;&#20363;&#23558;&#21069;&#20004;&#34892;&#37324;&#30340;l&#26367;&#25442;&#20026;L&#12290;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -n &#39;1,3&#123;&#10;            s/l/L/g&#10;            s/e/E/g&#10;            2 i tyrone&#10;            p&#10;            &#125;&#39; test1.txt&#10;&#10;#&#36755;&#20986;&#32467;&#26524;&#10;LEtitia&#10;tyrone&#10;maiL&#10;uuEncodE</span><br></pre></td></tr></table></figure>
+<p>最后这个例子比较复杂。使用大括号，表示对1到3行做了一组操作。</p>
+<h2 id="三、其他的小事">三、其他的小事</h2><ul>
+<li><p>以上都是采用了文件输入做实验，也可以采用其他方式，例如</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i &#34;s/letitia/hello world/g&#34; `grep &#34;letitia&#34; -rl test1.txt`&#10;#&#23558;grep&#30340;&#32467;&#26524;&#20316;&#20026;&#36755;&#20837;&#65292;&#27880;&#24847;&#35201;&#29992;&#21453;&#24341;&#21495;&#25324;&#36215;&#26469;&#65292;&#23558;&#25324;&#21495;&#20869;&#37096;&#20998;&#35299;&#37322;&#20026;linux&#21629;&#20196;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>当用户的编辑操作比较复杂时，建议使用sed脚本文件。</p>
+</li>
+<li>同正则表达式一样，匹配元字符时要用转义。使用基本正则表达式时，{}等也要转义。</li>
+</ul>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/07/07/DataStructureRBT2/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          树（二）：红黑树续篇
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/06/30/DataStructureRBT/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">树（二）：红黑树</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="LinuxCommandSed" data-title="sed命令详解" data-url="http://ningquec.github.io/2015/07/02/LinuxCommandSed/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2015 Tyrone
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/mobile.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+<! -- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="baidu-site-verification" content="jdIa3b5GkY" />
+  
+  <title>find命令详解 | Tyrone Li的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1.find命令简介find命令主要用于文件搜索，它的功能非常强大，可以根据不同的标准搜索任何文件，可以在任何位置进行检索。find命令的主要格式如下：1find path test action
+（1）path表示要搜索的路径，可以同时指定多个路径，路径之间以空格隔开：1find /user/bin              #&amp;#25628;&amp;#32034;/user/bin&amp;#30446;&amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="find命令详解">
+<meta property="og:url" content="http://ningquec.github.io/2015/06/10/CommandFind2/index.html">
+<meta property="og:site_name" content="Tyrone Li的博客">
+<meta property="og:description" content="1.find命令简介find命令主要用于文件搜索，它的功能非常强大，可以根据不同的标准搜索任何文件，可以在任何位置进行检索。find命令的主要格式如下：1find path test action
+（1）path表示要搜索的路径，可以同时指定多个路径，路径之间以空格隔开：1find /user/bin              #&amp;#25628;&amp;#32034;/user/bin&amp;#30446;&amp;">
+<meta property="og:updated_time" content="2015-06-17T12:33:03.519Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="find命令详解">
+<meta name="twitter:description" content="1.find命令简介find命令主要用于文件搜索，它的功能非常强大，可以根据不同的标准搜索任何文件，可以在任何位置进行检索。find命令的主要格式如下：1find path test action
+（1）path表示要搜索的路径，可以同时指定多个路径，路径之间以空格隔开：1find /user/bin              #&amp;#25628;&amp;#32034;/user/bin&amp;#30446;&amp;">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img lazy-src="http://7xjnnt.com1.z0.glb.clouddn.com/tyrone博客头像.png" class="js-avatar">
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Tyrone</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">天天向上</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="http://github.com/ningquec" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/数据结构/" style="font-size: 15px;">数据结构</a> <a href="/tags/树/" style="font-size: 15px;">树</a> <a href="/tags/正则表达式/" style="font-size: 10px;">正则表达式</a> <a href="/tags/集合类/" style="font-size: 10px;">集合类</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">天天向上</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Tyrone</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="http://7xjnnt.com1.z0.glb.clouddn.com/tyrone博客头像.png" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Tyrone</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">天天向上</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="http://github.com/ningquec" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-CommandFind2" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/06/10/CommandFind2/" class="article-date">
+  	<time datetime="2015-06-10T13:21:53.000Z" itemprop="datePublished">2015-06-10</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      find命令详解
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-find命令简介">1.<em>find命令简介</em></h2><p>find命令主要用于文件搜索，它的功能非常强大，可以根据不同的标准搜索任何文件，可以在任何位置进行检索。find命令的主要格式如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find path test action</span><br></pre></td></tr></table></figure></p>
+<p>（1）path表示要搜索的路径，可以同时指定多个路径，路径之间以空格隔开：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find /user/bin              #&#25628;&#32034;/user/bin&#30446;&#24405;&#21644;&#23376;&#30446;&#24405;&#10;find /                      #&#25628;&#32034;&#26681;&#30446;&#24405;&#21450;&#23376;&#30446;&#24405;&#65288;&#23454;&#38469;&#19978;&#23601;&#26159;&#25628;&#32034;&#25972;&#20010;&#25991;&#20214;&#31995;&#32479;&#65289;&#10;find .                      #&#25628;&#32034;&#24403;&#21069;&#30446;&#24405;&#10;find -root                  #&#25628;&#32034;root&#29992;&#25143;&#30340;&#20027;&#30446;&#24405;&#10;find /user/bin /home        #&#25628;&#32034;/user/bin&#21644;/home&#30446;&#24405;&#21450;&#23427;&#20204;&#30340;&#23376;&#30446;&#24405;</span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<p>（2）test表示测试条件，用户可以指定多个测试条件来查找符合特定标准的文件，条件之间以空格隔开：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find / -type f              #&#25628;&#32034;&#30340;&#25991;&#20214;&#31867;&#22411;&#65306;f=file d=directory&#10;find / -name &#34;*.txt&#34;        #&#25628;&#32034;&#25991;&#20214;&#21517;&#21518;&#32512;&#20026;txt&#65292;*&#20026;&#36890;&#37197;&#31526;</span><br></pre></td></tr></table></figure></p>
+<p>下面是详细测试条件表：</p>
+<p><table><tr><th>条件</th><th>说明</th></tr><tr><td><em><b>-name pattern</b></em></td><td>表示包含指定匹配模式的文件名，区分大小写</td></tr><tr><td>-iname pattern</td><td>表示包含指定匹配模式的文件名，不区分大小写</td></tr><tr><td><em><b>-type</b></em></td><td>指定文件类型</td></tr><tr><td>-perm mode</td><td>匹配权限被设置为指定mode的文件</td></tr><tr><td>-user userid</td><td>匹配所有者为指定用户id的文件</td></tr><tr><td>-group groupid</td><td>匹配所有者的主组为指定组id的文件</td></tr><tr><td>-size size</td><td>匹配大小为size的文件</td></tr><tr><td>-empty</td><td>匹配空文件</td></tr><tr><td>-amin [-+]n</td><td>文件最后一次访问时间，-n表示访问时间为距今n分钟以内，+n表示访问时间为距今n分钟以前，n表示恰好n分钟</td></tr><tr><td>-atime [-+]n</td><td>文件最后一次访问时间，时间单位为天</td></tr><tr><td>-cmin [-+]n</td><td>文件最后一次状态改变的时间，时间单位为分钟</td></tr><tr><td>-ctime [-+]n</td><td>文件最后一次状态改变的时间，时间单位为天</td></tr><tr><td>-mmin [-+]n</td><td>文件最后一次被修改的时间，时间单位为分钟</td></tr><tr><td>-mtime [-+]n</td><td>文件最后一次被修改的时间，时间单位为天</td></tr><br></table><br>（3）action表示对find结果执行操作。</p>
+<p><table><tr><th>动作</th><th>说明</th></tr><tr><td>-print</td><td>默认动作，将结果写入到标准输出</td></tr><tr><td>-fprint file</td><td>将结果写入到文件file</td></tr><tr><td>-ls</td><td>以详细格式显示搜索结果</td></tr><tr><td>-fls file</td><td>将详细格式的结果写入到文件file</td></tr><tr><td>-delete</td><td>将搜索到的文件删除</td></tr><tr><td><em><b>-exec command {} \;</b></em></td><td>查找并执行命令，{}表示搜索到的文件名</td></tr><tr><td>-ok command {} \;</td><td>查找并执行命令，但是需要用户确认</td><br></tr></table><br>-exec非常实用，使find命令对搜索结果中的文件执行指定的shell命令，其中command表示shell命令，大括号{}表示搜索结果中的文件名，最后的分号表示命令的结束，分号需要使用反斜线转义。注意其中的空格。<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find ./ -type f -mmin +5 -exec rm &#123;&#125; \;                 &#10;    #&#25214;&#20986;&#24403;&#21069;&#30446;&#24405;&#19979;&#26368;&#21518;&#19968;&#27425;&#22312;5&#20998;&#38047;&#20197;&#21069;&#20462;&#25913;&#36807;&#30340;&#25991;&#20214;&#24182;&#21024;&#38500;&#12290;</span><br></pre></td></tr></table></figure></p>
+<h2 id="2-find命令的应用场景">2.<em>find命令的应用场景</em></h2><h3 id="（1）_使用find查找文件中包含指定字符串hello_world的txt或者sh文件">（1） 使用find查找文件中包含指定字符串hello world的txt或者sh文件</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find ./ -type f -name &#34;*.sh&#34; -o -name &#34;*.txt&#34; -exec grep -i &#34;hello world&#34; &#123;&#125; \+;&#10;    # &#27880;&#24847;&#123;&#125;&#20004;&#31471;&#30340;&#31354;&#26684;&#12290;&#10;    # &#8220;+&#8221;&#21495;&#30340;&#20316;&#29992;&#65306;&#21487;&#20197;&#25171;&#21360;&#20986;&#35814;&#32454;&#32467;&#26524;&#65292;&#21253;&#25324;&#21305;&#37197;&#25991;&#20214;&#21517;&#21644;&#21305;&#37197;&#34892;&#20869;&#23481;&#10;    # or&#65306;&#36923;&#36753;&#25110;&#65292;&#22312;&#21629;&#20196;&#20013;&#29992;&#8220;-o&#8221;&#34920;&#31034;&#12290;&#26412;&#20363;&#20013;&#34920;&#31034;sh&#25991;&#20214;&#25110;&#32773;txt&#25991;&#20214;&#37117;&#28385;&#36275;&#27979;&#35797;&#26465;&#20214;&#12290;&#10;    # and&#65306;&#36923;&#36753;&#19982;&#65292;&#31995;&#32479;&#40664;&#35748;&#36873;&#39033;&#65292;&#27979;&#35797;&#26465;&#20214;&#20043;&#38388;&#20197;&#31354;&#26684;&#38548;&#24320;&#21363;&#21487;&#12290;&#10;    # not &#65306;&#36923;&#36753;&#38750;&#65292;&#22312;&#21629;&#20196;&#20013;&#29992;&#8220;&#65281;&#8221;&#34920;&#31034;&#65292;&#20363;&#22914;:&#10;    find ./ ! -name &#34;*.sh&#34;</span><br></pre></td></tr></table></figure>
+<p>那么能不能使用管道来实现呢？例如下面这样：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find ./ -type f -name &#34;*.sh&#34; -o -name &#34;*.txt&#34; | grep -i &#34;hello world&#34;&#10;    #&#19981;&#33021;&#24471;&#21040;&#32467;&#26524;&#12290;</span><br></pre></td></tr></table></figure></p>
+<p>这样无法想要的结果，因为管道会把find的结果作为输入赋给grep命令，这些结果只是文件名组成的字符串而不是文件的内容。</p>
+<h3 id="（2）_搭配xargs解决参数列太长导致溢出的错误">（2） 搭配xargs解决参数列太长导致溢出的错误</h3><p>参考资料：<a href="http://czmmiao.iteye.com/blog/1949225" target="_blank" rel="external">Xargs用法详解(原创)</a></p>
+<p>在使用find命令的-exec选项处理匹配到的文件时，find命令将所有匹配到的文件一起传递给exec执行。但有些系统对能够传递给exec的命令长度有限制，这样在find命令运行几分钟之后，就会出现 溢出错误。错误信息通常是“参数列太长”或“参数列溢出”。<br>可以把匹配到的文件传递给xargs命令，而<strong><em>xargs命令每次只获取一部分文件而不是全部，不像-exec选项那样。这样它可以先处理最先获取的一部分文件，然后是下一批，并如此继续下去。</em></strong><br>在使用xargs命令时，究竟是一次获取所有的参数，还是分批取得参数，以及每一次获取参数的数目都会根据该命令的选项及系统内核中相应的可调参数来确定。<br>并且，xargs可以把管道传来的字符串当作文件去执行，这样就解决了（1）中的问题。<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find ./ -type f -name &#34;*.sh&#34; -o -name &#34;*.txt&#34; | xargs grep -i &#34;hello world&#34;</span><br></pre></td></tr></table></figure></p>
+<p>xargs就是为了能对find搜索到的文件进行操作而编写的，还有很多其他的用途，例如：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find . -perm -7 -print | xargs chmod o-w  &#10;    #&#22312;&#24403;&#21069;&#30446;&#24405;&#19979;&#26597;&#25214;&#25152;&#26377;&#29992;&#25143;&#20855;&#26377;&#35835;&#12289;&#20889;&#21644;&#25191;&#34892;&#26435;&#38480;&#30340;&#25991;&#20214;&#65292;&#24182;&#25910;&#22238;&#30456;&#24212;&#30340;&#20889;&#26435;&#38480;&#12290;&#10;find / -name *.jpg -type f -print | xargs tar -cvzf images.tar.gz&#10;    #&#26597;&#25214;&#25152;&#26377;&#30340;jpg &#25991;&#20214;&#65292;&#24182;&#19988;&#21387;&#32553;&#23427;&#12290;&#10;find ~ -name &#8216;*.log&#8217; -print0 | xargs -i -0 rm -f &#123;&#125;&#10;    #&#23581;&#35797;&#29992;rm&#21024;&#38500;&#22826;&#22810;&#30340;&#25991;&#20214;&#65292;&#20320;&#21487;&#33021;&#24471;&#21040;&#19968;&#20010;&#38169;&#35823;&#20449;&#24687;&#65306;/bin/rm Argument list too long&#12290;&#29992;xargs&#21435;&#36991;&#20813;&#36825;&#20010;&#38382;&#39064;&#12290;&#10;ls *.jpg | xargs -n1 -i cp &#123;&#125; /external-hard-drive/directory&#10;    #&#25335;&#36125;&#25152;&#26377;&#30340;&#22270;&#29255;&#25991;&#20214;&#21040;&#19968;&#20010;&#22806;&#37096;&#30340;&#30828;&#30424;&#39537;&#21160;&#12290;</span><br></pre></td></tr></table></figure></p>
+<h3 id="（3）_统计目录中全部的文件数量及子目录数量。">（3） 统计目录中全部的文件数量及子目录数量。</h3><p>例如以下的shell脚本：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#&#65281; /bin/bash&#10;&#10;files=&#39;find /etc -type f -print | wc -l&#39;&#10;    #&#32479;&#35745;&#25991;&#20214;&#25968;&#37327;&#10;directories=&#39;find /etc -type d -print | wc -l&#39;&#10;    #&#32479;&#35745;&#23376;&#30446;&#24405;&#25968;&#37327;&#10;    echo &#34;There are $files regular files in /etc dictionary.&#34;   &#10;    echo &#34;There are $directinories directinories in /etc dictionary.&#34;&#10;    #&#36755;&#20986;&#32479;&#35745;&#32467;&#26524;</span><br></pre></td></tr></table></figure></p>
+<h3 id="（4）_设置crontab任务。">（4） 设置crontab任务。</h3><p>工作里很多task都要在服务器上进行，很难清晰的记录到每一个自己所生成修改的文件，其中的权限问题可能会对其他人产生一些困扰。我们可以设置crontab任务，定时的修改自己文件所属的组或者文件的权限来控制此问题。例如：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">00 05 * * * find /path -user tyroneli -mtime -1 -exec chgrp groupid &#123;&#125; \;&#10;#&#22312;&#27599;&#22825;5&#28857;&#65292;&#22312;path&#30446;&#24405;&#19979;&#26597;&#25214;&#26368;&#21518;&#20462;&#25913;&#26102;&#38388;&#19968;&#22825;&#20043;&#20869;&#29992;&#25143;&#21517;&#20026;tyroneli&#30340;&#25991;&#20214;&#25110;&#30446;&#24405;&#65292;&#20462;&#25913;&#20854;&#25152;&#23646;&#32452;&#12290;</span><br></pre></td></tr></table></figure></p>
+<h2 id="3-_结语">3. <em>结语</em></h2><p>在日常操作中经常会接触到find命令，所以总结了以上几个我遇到过的应用场景作为备忘，也与诸君分享。find命令是最古老、最复杂的命令之一，本篇之外还有很多路要走。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/06/11/CommandFind/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          find命令拾遗
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="CommandFind2" data-title="find命令详解" data-url="http://ningquec.github.io/2015/06/10/CommandFind2/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2015 Tyrone
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/mobile.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+<! -- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+  </div>
+</body>
+</html>

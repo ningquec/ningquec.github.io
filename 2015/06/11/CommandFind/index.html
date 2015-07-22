@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="baidu-site-verification" content="jdIa3b5GkY" />
+  
+  <title>find命令拾遗 | Tyrone Li的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="上一篇中总结了find命令的简单用法，觉得足够用了，刚过两天脚本中看不懂的find就一个个跳出来。所以将这些放在拾遗里面，也许会有再拾遗，甚至是拾遗又见拾遗。。。。进无止境进无止境。。。
+（1）-maxdepth的用法-maxdepth和-mindepth可以限制搜索的深度。当搜索文件超过某个级别或者搜索过多的目录，会导致查找速度变慢，查找花费的时间过多，这时候就可以用-maxdepth来解决：1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="find命令拾遗">
+<meta property="og:url" content="http://ningquec.github.io/2015/06/11/CommandFind/index.html">
+<meta property="og:site_name" content="Tyrone Li的博客">
+<meta property="og:description" content="上一篇中总结了find命令的简单用法，觉得足够用了，刚过两天脚本中看不懂的find就一个个跳出来。所以将这些放在拾遗里面，也许会有再拾遗，甚至是拾遗又见拾遗。。。。进无止境进无止境。。。
+（1）-maxdepth的用法-maxdepth和-mindepth可以限制搜索的深度。当搜索文件超过某个级别或者搜索过多的目录，会导致查找速度变慢，查找花费的时间过多，这时候就可以用-maxdepth来解决：1">
+<meta property="og:updated_time" content="2015-06-17T12:33:02.535Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="find命令拾遗">
+<meta name="twitter:description" content="上一篇中总结了find命令的简单用法，觉得足够用了，刚过两天脚本中看不懂的find就一个个跳出来。所以将这些放在拾遗里面，也许会有再拾遗，甚至是拾遗又见拾遗。。。。进无止境进无止境。。。
+（1）-maxdepth的用法-maxdepth和-mindepth可以限制搜索的深度。当搜索文件超过某个级别或者搜索过多的目录，会导致查找速度变慢，查找花费的时间过多，这时候就可以用-maxdepth来解决：1">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img lazy-src="http://7xjnnt.com1.z0.glb.clouddn.com/tyrone博客头像.png" class="js-avatar">
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Tyrone</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">天天向上</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="http://github.com/ningquec" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/数据结构/" style="font-size: 15px;">数据结构</a> <a href="/tags/树/" style="font-size: 15px;">树</a> <a href="/tags/正则表达式/" style="font-size: 10px;">正则表达式</a> <a href="/tags/集合类/" style="font-size: 10px;">集合类</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">天天向上</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Tyrone</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="http://7xjnnt.com1.z0.glb.clouddn.com/tyrone博客头像.png" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Tyrone</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">天天向上</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="http://github.com/ningquec" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-CommandFind" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/06/11/CommandFind/" class="article-date">
+  	<time datetime="2015-06-11T12:42:55.000Z" itemprop="datePublished">2015-06-11</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      find命令拾遗
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>上一篇中总结了find命令的简单用法，觉得足够用了，刚过两天脚本中看不懂的find就一个个跳出来。所以将这些放在拾遗里面，也许会有再拾遗，甚至是拾遗又见拾遗。。。。进无止境进无止境。。。</p>
+<h3 id="（1）-maxdepth的用法">（1）-maxdepth的用法</h3><p>-maxdepth和-mindepth可以限制搜索的深度。当搜索文件超过某个级别或者搜索过多的目录，会导致查找速度变慢，查找花费的时间过多，这时候就可以用-maxdepth来解决：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find /home -maxdepth 1 -name &#34;*.csv&#34; -mtime -5 | wc -l</span><br></pre></td></tr></table></figure></p>
+<p>本例表示只在/home目录下查找最后修改时间在5天以内的csv文件，并统计文件的数目。如果修改为<code>-maxdepth 2</code>就表示在/home目录及其一级子目录下查找，不会搜索到/home/sub/sub1目录下。-mindepth的意义同-maxdepth相反，此处不赘述。<br><a id="more"></a></p>
+<h3 id="（2）-depth的用法和find结果的排列顺序">（2）-depth的用法和find结果的排列顺序</h3><p>在你想要批量备份文件的时候，总希望先备份所有的文件，再备份子目录下的文件，这里需要考虑如何find出想要备份文件的顺序。<br>-depth可以在处理目录以前首先处理目录下的子内容。以下查询显示了使用-depth的效果：<br>第一个例子：不使用depth，使用通配符*搜索当前目录下的file和directory<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find *</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#&#36755;&#20986;&#32467;&#26524;&#65306;&#10;chmod&#10;result.txt&#10;sasuser.v94&#10;sasuser.v94/regstry.sas7bitm&#10;sasuser.v94/parms.sas7bcat&#10;zhnlicron</span><br></pre></td></tr></table></figure>
+<p>第二个例子：使用depth，使用通配符*搜索当前目录下的file和directory<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find * -depth</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#&#36755;&#20986;&#32467;&#26524;&#10;chmod&#10;result.txt&#10;sasuser.v94/regstry.sas7bitm&#10;sasuser.v94/parms.sas7bcat&#10;sasuser.v94&#10;zhnlicron</span><br></pre></td></tr></table></figure>
+<p>可以看到/sasuser和它的子目录中的文件位置做了调换。<code>find * -depth</code>会先输出/sasuser目录下的文件。<br>那么问题来了，在不考虑depth的情况下，find是按照什么顺序来输出结果呢？如上第一个例子使用了*通配符，所以默认会先按照字典序来匹配，在进行find操作。<br>比如*会先匹配到当前目录下的./chmod，然后再find ./chmod，所以find出来的结果是按照字典序的。<br>我们再做一个find操作，不使用通配符*直接进行find当前目录：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find .</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#&#36755;&#20986;&#32467;&#26524;&#10;chmod&#10;zhnlicron&#10;result.txt&#10;sasuser.v94&#10;sasuser.v94/regstry.sas7bitm&#10;sasuser.v94/parms.sas7bcat</span><br></pre></td></tr></table></figure>
+<p>位置再次发生了变化，至少表面上看不可能是按照字典序了，那么是依照什么规则呢？这种则涉及到linux中文件名在超级块中的存储方式（spuer_block）：<br>为了快速找到一个文件，我们通常会使用hash算法，和B树算法(二叉树算法)在超级块存储文件名（与inode对应），find操作就是根据B树遍历查找的。<br>在不同的机器中，文件挂到B树上的方式不同，可能遍历查找的结果就会不同。比如以左遍历挂文件名，右遍历来查找文件名。<a href="http://zhidao.baidu.com/link?url=NAUEjiIu4G3CZZRppd_TKmxJgG4WQ77lrx4cp0cNXiNb82nBSINyPZTrCEQJ1E99U3LQgUK4OsILV3LCWEkMkq" target="_blank" rel="external">参考资料</a></p>
+<h3 id="（3）使用多个{}的例子">（3）使用多个{}的例子</h3><p>继续上面提出的备份问题，我们已经按照顺序把需要的文件find出来了，需要批量备份成*.bak文件。可以利用{}这样写：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find -name &#34;*.txt&#34; -exec cp &#123;&#125; &#123;&#125;.bak \;&#10;    #&#27880;&#24847;&#25324;&#21495;&#20043;&#38388;&#30340;&#31354;&#26684;&#12290;&#10;    #&#25209;&#37327;&#23558;&#24403;&#21069;&#30446;&#24405;&#19979;&#21518;&#32512;&#20026;txt&#30340;&#25991;&#20214;&#22791;&#20221;&#19968;&#20221;txt.bak&#25991;&#20214;</span><br></pre></td></tr></table></figure></p>
+<h3 id="（4）-perm的用法">（4）-perm的用法</h3><p><a href="http://tyroneli.com/2015/06/10/find%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/#more" target="_blank" rel="external">上一篇</a>将find操作用于定时crontab任务，来执行change group的操作。其实可以用-perm来更准确的定位到需要修改权限的文件。-perm的用法有以下几种简单的形式：</p>
+<ul>
+<li>find -perm mode</li>
+<li>find -perm -mode</li>
+<li>find -perm +mode<br>mode表示严格匹配，-mode表示find权限大于等于mode的文件，+mode表示find权限小于等于mode的文件（可能跟正常的认识刚好相反）。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find . -perm -g=r -type f -exec ll &#123;&#125; \;&#10;    #&#25214;&#21040;&#20855;&#26377;&#32452;&#35835;&#26435;&#38480;&#30340;&#25991;&#20214;&#65292;&#29992;ll&#21629;&#20196;&#26174;&#31034;&#25991;&#20214;&#35814;&#32454;&#20449;&#24687;&#12290;&#10;find . -perm -744;&#10;    #&#25214;&#21040;&#26435;&#38480;&#22823;&#20110;&#31561;&#20110;744&#30340;&#25991;&#20214;&#12290;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>【权限的数字表示】使用ll命令可以查看文件的权限：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ll /home/tyrone&#10;#&#26174;&#31034;&#32467;&#26524;&#10;-rw-rw-r-- 1 tyrone tyrone   199 Jun  9 20:02 autoexec.sas&#10;-rw-rw-r-- 1 tyrone tyrone     0 Jun  4 01:42 chmod&#10;-rw------- 1 tyrone tyrone     0 Jun  9 19:36 nohup.out&#10;-rw-rw-r-- 1 tyrone tyrone 70429 Jun 10 22:10 resultOfNas.txt&#10;drwxrwxr-x 2 tyrone tyrone  4096 Jun  9 23:11 sasuser.v94&#10;-rw-rw-r-- 1 tyrone tyrone     0 Jun  5 02:13 tyronecron</span><br></pre></td></tr></table></figure></p>
+<p>最左边是一串字母和-的集合，从第二列开始每三个一组，分别表示文件所属用户、所属组、组外用户的权限。r代表读，w代表写，x代表执行。例如<code>-rw-rw-r--</code>就表示文件所属用户和所属组对该文件有读写权限，组外只有读的权限。<br>那么怎么对应于数字呢？其中，r=4，w=2，x=1，然后每三个字母一组把数字加起来的和组成一个三位数字。例如<code>-rw-rw-r--</code>就等于<code>-420420400</code>，化为三位数字664即为权限所对应的值。</p>
+<h2 id="结语">结语</h2><p>Linux命令很不容易记住，就像散落一地的珍珠，本系列旨在能够不间断的捡起一些，串在一起。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/06/13/HashTable&BloomFilter/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          hash表与bloom filter
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/06/10/CommandFind2/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">find命令详解</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="CommandFind" data-title="find命令拾遗" data-url="http://ningquec.github.io/2015/06/11/CommandFind/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2015 Tyrone
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/mobile.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+<! -- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+  </div>
+</body>
+</html>
