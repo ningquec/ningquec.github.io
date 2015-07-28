@@ -161,6 +161,63 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-DataStructureRBT" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/06/30/DataStructureRBT/" class="article-date">
+  	<time datetime="2015-06-30T12:45:05.000Z" itemprop="datePublished">2015-06-30</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/06/30/DataStructureRBT/">树（二）：红黑树</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、简介">一、简介</h2><p>上一篇中介绍了二叉查找树的特性，其中提到二叉查找树查找插入操作的时间复杂度约是O(log_2n)，但这只是在最优状态下。<br><img src="http://7xjnnt.com1.z0.glb.clouddn.com/4310693094167885900.jpg?imageView2/0/w/300/h/250" alt="二叉查找树退化为斜树"><br>所以我们希望得到一棵基本维持平衡的二叉查找树，在最坏的情况下时间复杂度也能达到O(log_2n)。于是红黑树应运而生。</p>
+<p>红黑树是这样的一种二叉查找树（是的，它满足二叉查找树的所有性质）：每个节点都含有5个域，包括指向左右孩子的指针、指向父节点的指针、数据域和颜色。如果相应的指针为空设为NIL。同时符合以下4大性质：<br>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构/">数据结构</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/树/">树</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a  href="/2015/06/30/DataStructureRBT/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+  
     <article id="post-FileTreeInJava" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -507,66 +564,9 @@
 
 
   
-    <article id="post-CommandFind2" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/06/10/CommandFind2/" class="article-date">
-  	<time datetime="2015-06-10T13:21:53.000Z" itemprop="datePublished">2015-06-10</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/06/10/CommandFind2/">find命令详解</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1-find命令简介">1.<em>find命令简介</em></h2><p>find命令主要用于文件搜索，它的功能非常强大，可以根据不同的标准搜索任何文件，可以在任何位置进行检索。find命令的主要格式如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find path test action</span><br></pre></td></tr></table></figure></p>
-<p>（1）path表示要搜索的路径，可以同时指定多个路径，路径之间以空格隔开：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find /user/bin              #&#25628;&#32034;/user/bin&#30446;&#24405;&#21644;&#23376;&#30446;&#24405;&#10;find /                      #&#25628;&#32034;&#26681;&#30446;&#24405;&#21450;&#23376;&#30446;&#24405;&#65288;&#23454;&#38469;&#19978;&#23601;&#26159;&#25628;&#32034;&#25972;&#20010;&#25991;&#20214;&#31995;&#32479;&#65289;&#10;find .                      #&#25628;&#32034;&#24403;&#21069;&#30446;&#24405;&#10;find -root                  #&#25628;&#32034;root&#29992;&#25143;&#30340;&#20027;&#30446;&#24405;&#10;find /user/bin /home        #&#25628;&#32034;/user/bin&#21644;/home&#30446;&#24405;&#21450;&#23427;&#20204;&#30340;&#23376;&#30446;&#24405;</span><br></pre></td></tr></table></figure></p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/06/10/CommandFind2/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
     </nav>
   
 </div>

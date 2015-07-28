@@ -233,7 +233,7 @@ a {
   margin: 3px;
 }
 #container .left-col {
-  background: #fff;
+  background: #f5f5d5;
   width: 300px;
   position: fixed;
   opacity: 1;
@@ -846,7 +846,7 @@ a {
   margin: 30px 40px 30px 40px;
   position: relative;
   border: 1px solid #ddd;
-  background: #fff;
+  background: #f5f5d5;
   visibility: hidden;
   -webkit-transition: all 0.2s ease-in;
 }
