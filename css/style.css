@@ -1014,7 +1014,7 @@ a {
 }
 .article-entry h2 {
   margin-top: 20px;
-  font-weight: 300;
+  font-size: 1.9em;
   color: #574c4c;
   padding-bottom: 5px;
   border-bottom: 1px solid #ddd;
@@ -1027,7 +1027,6 @@ a {
   font-weight: 300;
   color: #574c4c;
   padding-bottom: 5px;
-  border-bottom: 1px solid #ddd;
 }
 .article-entry video {
   max-width: 100%;
