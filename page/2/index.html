@@ -101,7 +101,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Linux/" style="font-size: 16.67px;">Linux</a> <a href="/tags/数据结构/" style="font-size: 13.33px;">数据结构</a> <a href="/tags/树/" style="font-size: 13.33px;">树</a> <a href="/tags/正则表达式/" style="font-size: 10px;">正则表达式</a> <a href="/tags/集合类/" style="font-size: 10px;">集合类</a>
+						<a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/JavaWeb/" style="font-size: 10px;">JavaWeb</a> <a href="/tags/Linux/" style="font-size: 17.5px;">Linux</a> <a href="/tags/数据结构/" style="font-size: 15px;">数据结构</a> <a href="/tags/树/" style="font-size: 15px;">树</a> <a href="/tags/正则表达式/" style="font-size: 12.5px;">正则表达式</a> <a href="/tags/集合类/" style="font-size: 12.5px;">集合类</a>
 					</div>
 				</section>
 				
@@ -160,6 +160,65 @@
 	</div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-LinuxCommandSed" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/07/02/LinuxCommandSed/" class="article-date">
+  	<time datetime="2015-07-02T10:51:48.000Z" itemprop="datePublished">2015-07-02</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/07/02/LinuxCommandSed/">sed命令详解</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、简介">一、简介</h2><p>sed命令是一个很强大的文本编辑器，可以对来自文件、以及标准输入的文本进行编辑。</p>
+<p>执行时，sed会从文件或者标准输入中读取一行，将其复制到缓冲区，对文本编辑完成之后，读取下一行直到所有的文本行都编辑完毕。<br>所以sed命令处理时只会改变缓冲区中文本的副本，如果想要直接编辑原文件，可以使用-i选项或者将结果重定向到新的文件中。</p>
+<p>sed命令的基本语法如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed [options] commands [inputfile...]</span><br></pre></td></tr></table></figure></p>
+<p>options表示sed命令的一些选项，常见的选项如下表：<br>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a  href="/2015/07/02/LinuxCommandSed/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
   
     <article id="post-DataStructureRBT" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -491,64 +550,6 @@
       
         <p class="article-more-link">
           <a  href="/2015/06/13/HashTable&BloomFilter/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
-    <article id="post-CommandFind" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/06/11/CommandFind/" class="article-date">
-  	<time datetime="2015-06-11T12:42:55.000Z" itemprop="datePublished">2015-06-11</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/06/11/CommandFind/">find命令拾遗</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>上一篇中总结了find命令的简单用法，觉得足够用了，刚过两天脚本中看不懂的find就一个个跳出来。所以将这些放在拾遗里面，也许会有再拾遗，甚至是拾遗又见拾遗。。。。进无止境进无止境。。。</p>
-<h3 id="（1）-maxdepth的用法">（1）-maxdepth的用法</h3><p>-maxdepth和-mindepth可以限制搜索的深度。当搜索文件超过某个级别或者搜索过多的目录，会导致查找速度变慢，查找花费的时间过多，这时候就可以用-maxdepth来解决：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find /home -maxdepth 1 -name &#34;*.csv&#34; -mtime -5 | wc -l</span><br></pre></td></tr></table></figure></p>
-<p>本例表示只在/home目录下查找最后修改时间在5天以内的csv文件，并统计文件的数目。如果修改为<code>-maxdepth 2</code>就表示在/home目录及其一级子目录下查找，不会搜索到/home/sub/sub1目录下。-mindepth的意义同-maxdepth相反，此处不赘述。<br>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/06/11/CommandFind/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>
