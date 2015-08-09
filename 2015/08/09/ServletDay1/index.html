@@ -4,17 +4,34 @@
   <meta charset="utf-8">
   <meta name="baidu-site-verification" content="jdIa3b5GkY" />
   
-  <title>Tyrone Li的博客</title>
+  <title>Servlet学习笔记（一） | Tyrone Li的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Tyrone Li的博客">
-<meta property="og:url" content="http://ningquec.github.io/index.html">
+  <meta name="description" content="一、servlet简介Servlet是Sun公司提供的一门用于开发动态web资源的技术。Servlet接受并且响应从客户端发送的请求，一般遵循http协议。编写一个servlet的方法很简单：
+
+编写一个java类，实现servlet接口
+把开发好的java类部署到web服务器中
+
+servlet接口定义了一系列方法来进行：初始化servlet，响应请求、 从服务器移除servlet。这些方法是生">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Servlet学习笔记（一）">
+<meta property="og:url" content="http://ningquec.github.io/2015/08/09/ServletDay1/index.html">
 <meta property="og:site_name" content="Tyrone Li的博客">
-<meta property="og:description">
+<meta property="og:description" content="一、servlet简介Servlet是Sun公司提供的一门用于开发动态web资源的技术。Servlet接受并且响应从客户端发送的请求，一般遵循http协议。编写一个servlet的方法很简单：
+
+编写一个java类，实现servlet接口
+把开发好的java类部署到web服务器中
+
+servlet接口定义了一系列方法来进行：初始化servlet，响应请求、 从服务器移除servlet。这些方法是生">
+<meta property="og:image" content="http://7xjnnt.com1.z0.glb.clouddn.com/绘图1.jpg">
+<meta property="og:updated_time" content="2015-08-09T14:06:35.495Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Tyrone Li的博客">
-<meta name="twitter:description">
+<meta name="twitter:title" content="Servlet学习笔记（一）">
+<meta name="twitter:description" content="一、servlet简介Servlet是Sun公司提供的一门用于开发动态web资源的技术。Servlet接受并且响应从客户端发送的请求，一般遵循http协议。编写一个servlet的方法很简单：
+
+编写一个java类，实现servlet接口
+把开发好的java类部署到web服务器中
+
+servlet接口定义了一系列方法来进行：初始化servlet，响应请求、 从服务器移除servlet。这些方法是生">
   
   
     <link rel="icon" href="/favicon.png">
@@ -159,9 +176,7 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap">
-  
-    <article id="post-ServletDay1" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-ServletDay1" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2015/08/09/ServletDay1/" class="article-date">
@@ -177,12 +192,23 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/08/09/ServletDay1/">Servlet学习笔记（一）</a>
+    <h1 class="article-title" itemprop="name">
+      Servlet学习笔记（一）
     </h1>
   
 
       </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaWeb/">JavaWeb</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Servlet/">Servlet</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
       
     
     <div class="article-entry" itemprop="articleBody">
@@ -229,394 +255,61 @@
       
     </div>
     
-    <div class="article-info article-info-index">
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaWeb/">JavaWeb</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Servlet/">Servlet</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/08/03/FakeBaiduCom/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">怎么写一个www.baidu.com</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
   
 </article>
 
 
-
-
-
-
-  
-    <article id="post-FakeBaiduCom" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/08/03/FakeBaiduCom/" class="article-date">
-  	<time datetime="2015-08-03T14:08:21.000Z" itemprop="datePublished">2015-08-03</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/08/03/FakeBaiduCom/">怎么写一个www.baidu.com</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>当我们在浏览器地址栏键入www.baidu.com并回车，就会显示出baidu的主页.<br>但是我想输入之后，能够显示出我的主页，一定是很炫酷的。</p>
-<p>怎么改？首先要弄明白背后的原理。</p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaWeb/">JavaWeb</a></li></ul>
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
 	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/08/03/FakeBaiduCom/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
 
 
 
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="ServletDay1" data-title="Servlet学习笔记（一）" data-url="http://ningquec.github.io/2015/08/09/ServletDay1/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
 
 
 
-  
-    <article id="post-HowToInterview" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/07/28/HowToInterview/" class="article-date">
-  	<time datetime="2015-07-28T12:27:30.000Z" itemprop="datePublished">2015-07-28</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/28/HowToInterview/">面试的那些事</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在java研发的面试中，有一些问题的出现频度非常的高。<br>为什么面试官们总是喜欢问集合类，喜欢问多线程？为什么希望我们掌握spring框架，掌握sql，掌握web相关知识？<br>如果在求职网站上做一下简单的统计，爬取公司的招聘简章，不难发现规律。java相关职位的热词前6名分别是<b>java，spring，web，mysql，Oracle，Linux</b>。</p>
-<p>我们可以从以上获悉一些职业的知识需求以及未来的发展方向。</p>
-<ul>
-<li>注：以下只是个人见解，妄自揣测，并不一定准确。</li>
-</ul>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/07/28/HowToInterview/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
-    <article id="post-JavaStatic" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/07/25/JavaStatic/" class="article-date">
-  	<time datetime="2015-07-25T03:11:29.000Z" itemprop="datePublished">2015-07-25</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/25/JavaStatic/">Static的一些实验</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>java中，一切都是对象。我们通常先new出类的实例：对象，然后通过对象来操作变量和方法。<br>事无绝对，有些情况下我们也需要“全局”的变量和方法。</p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/07/25/JavaStatic/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
-    <article id="post-RELinearEquation" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/07/14/RELinearEquation/" class="article-date">
-  	<time datetime="2015-07-14T11:22:24.000Z" itemprop="datePublished">2015-07-14</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/14/RELinearEquation/">正则表达式解决方程是否有解问题</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>部分译自<a href="http://blog.stevenlevithan.com/archives/algebra-with-regexes" target="_blank" rel="external">http://blog.stevenlevithan.com/archives/algebra-with-regexes</a></p>
-</blockquote>
-<p>正则表达式在数学上的应用是弱项。对于一个正则表达式引擎来说，0~9这10个字符是最为特殊的。</p>
-<p>必须说明Perl和PCRE是个例外，它们允许在匹配进程中的任何一点插入执行动态代码，这也显示了它们的巨大潜力。Perl可以在正则表达式中插入代码，PCRE可以调用外部函数。总的来说，用正则表达式解决数学问题是永远的隐痛。</p>
-<p>然而，最基本的正则表达式也可以榨出更多美味的汁来。它甚至可以<a href="http://coolshell.cn/articles/2704.html" target="_blank" rel="external">匹配素数</a>。下面的例子可能让你更加惊艳：<b>正则表达式能判断线性方程是否有解！</b></p>
-<p>基本正则表达式如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^(.*)\1&#123;A&#8722;1&#125;(.*)\2&#123;B&#8722;1&#125;$</span><br></pre></td></tr></table></figure></p>
-<p>其中A和B为占位符，使用时候用未知数的系数替换。这里会看的很迷糊，最下面再解释。例如17x+12y=51，A和B就被分别替换为17和12。如果我们将51的字符串代入来匹配，第一个子表达式结果会是3，第二个子表达式会是0，表示x=3，y=0，也就是说这个方程有解。如果方程无解，正则表达式就匹配失败；如果方程有多组解，正则表达式会匹配到x最大的情况。</p>
-<p>注意，这样只是看起来很酷。其实正则引擎匹配时会发生多次回溯，某些情况下效率相当低……</p>
-<hr>
-<p>首先介绍一下如何匹配，还是以17x+12y=51为例。<br>正则表达式代入A和B：<code>^(.*)\1{16}(.*)\2{11}$</code>。前半部分(.*)\1{16}表示先匹配一个(.*),即任意个重复字符，假定为“11”，那么然后会重复匹配16次“11”。后半部分同理。<br>在匹配的时候，我们会先把51转换为一个“11……11”（共51个1）的字符串，然后进行匹配。<br>我们之所以将A、B减去1是因为我们已经在子表达式中（括号中的部分）匹配了一次模式。</p>
-<p>下面说明一下其数学原理：<br>我们把(.*)看做是(1*)，即匹配若干个1。匹配成功的情况为：<br>1.匹配一个“111”，剩下51-3=448个1。<br>2.重复16次“111”，共16*3=48。<br>3.51个1匹配成功。<br>4.后半部分(.*)\2{11}重复匹配12次空串，(.*)此时为0个1。</p>
-<p>也就是说，正则表达式匹配方程是否有解其实是利用了类似穷举的方式。在最开始，正则引擎可能尝试了以17个空串开头、17个“1”开头、17个“11”开头的情况，类似于尝试17*0+12y=51、17*1+12y=51、17*2+12y=51，但都无法得出恰当的y来完成匹配。</p>
-<p>假如我想要匹配一个7位数，17x+12y=1700012。其中的一组解为x=100000，y=1，正则引擎要从0个1试验到100000个1开头……它看了这个七位数一眼，一眼就是万年……</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/正则表达式/">正则表达式</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
-    <article id="post-CollectionHashMap" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/07/11/CollectionHashMap/" class="article-date">
-  	<time datetime="2015-07-11T05:36:49.000Z" itemprop="datePublished">2015-07-11</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/11/CollectionHashMap/">JDK1.8中的HashMap介绍和思考</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一、简介">一、简介</h2><blockquote>
-<p>HashMap是基于哈希表的Map接口的非同步实现。此实现提供所有可选的映射操作，并允许使用null值和null键。此类不保证映射的顺序，特别是它不保证该顺序恒久不变。</p>
-</blockquote>
-<ol>
-<li>用来存储键值对（Key-Value）。所以我们可以用它来快速匹配映射关系，例如词串的出现次数、国家的首都、小游戏中状态是否合法等等。</li>
-<li>是一个散列表。所以它存取较快，同时需要好的hash函数和碰撞处理。</li>
-</ol>
-<p>JDK1.8以前，HashMap采用“拉链法”来实现：如图，使用数组+链表来处理冲突。使用hash函数得到一个数组索引，同一个Hash值的键值对存储在一个链表里。<br><img src="http://7xjnnt.com1.z0.glb.clouddn.com/20130314151321_611.jpg?imageView2/0/w/400/" alt="拉链法图示"><br>当链表很长的时候，会导致查询速度变慢，所以在这个版本中，将链表做了一点小小的改动。当链表长度超过8时，链表将转化为一棵红黑树，这样查找时间就从O(n)降低到了O(log_2n)。下面就通过源码来讲解一下HashMap的具体实现。<br>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/集合类/">集合类</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/07/11/CollectionHashMap/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
-    <article id="post-ShellProgrammingSkills" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/07/10/ShellProgrammingSkills/" class="article-date">
-  	<time datetime="2015-07-10T13:21:27.000Z" itemprop="datePublished">2015-07-10</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/10/ShellProgrammingSkills/">shell脚本编程小技巧</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>总结的一些shell小技巧，时时更新中。。</p>
-<p>（1）使用&amp;&amp;和||的短路特性，假如传递了参数，PARAM=参数，否则给PARAM赋一个值。（简化if else）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[[ -n &#34;$1&#34; ]] &#38;&#38; PARAM=$1 || PARAM=value</span><br></pre></td></tr></table></figure></p>
-<p>（2）测试上一个命令的退出状态，将错误写入log文件。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[ $? &#8211;gt 0 ] &#38;&#38; echo &#39;Something Wrong, please investigate!&#39; &#62;&#62; $&#123;LOG_FILE&#125;</span><br></pre></td></tr></table></figure></p>
-<p>（3）脚本中产生的一些文件，比如log之类记得最后赋以合适的权限和群组。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find -type f -mtime -1 &#8211;user `whoami` -exec chmod 777 &#123;&#125; \;&#10;find -type f -mtime -1 &#8211;user `whoami` -exec chgrp group &#123;&#125; \;</span><br></pre></td></tr></table></figure></p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/07/10/ShellProgrammingSkills/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
-  
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
-    </nav>
-  
 </div>
       <footer id="footer">
   <div class="outer">

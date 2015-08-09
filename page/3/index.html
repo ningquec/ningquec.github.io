@@ -101,7 +101,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/JavaWeb/" style="font-size: 10px;">JavaWeb</a> <a href="/tags/Linux/" style="font-size: 17.5px;">Linux</a> <a href="/tags/数据结构/" style="font-size: 15px;">数据结构</a> <a href="/tags/树/" style="font-size: 15px;">树</a> <a href="/tags/正则表达式/" style="font-size: 12.5px;">正则表达式</a> <a href="/tags/集合类/" style="font-size: 12.5px;">集合类</a>
+						<a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/JavaWeb/" style="font-size: 12.5px;">JavaWeb</a> <a href="/tags/Linux/" style="font-size: 17.5px;">Linux</a> <a href="/tags/Servlet/" style="font-size: 10px;">Servlet</a> <a href="/tags/数据结构/" style="font-size: 15px;">数据结构</a> <a href="/tags/树/" style="font-size: 15px;">树</a> <a href="/tags/正则表达式/" style="font-size: 12.5px;">正则表达式</a> <a href="/tags/集合类/" style="font-size: 12.5px;">集合类</a>
 					</div>
 				</section>
 				
@@ -160,6 +160,63 @@
 	</div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-HashTable&amp;BloomFilter" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/06/13/HashTable&BloomFilter/" class="article-date">
+  	<time datetime="2015-06-13T06:02:43.000Z" itemprop="datePublished">2015-06-13</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/06/13/HashTable&BloomFilter/">hash表与bloom filter</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>如果想要快速存取一串小整数，可以用一个数组来存储。将整数的值作为它们在数组中的索引位置，这样就可以在O(1)的时间内快速访问任何一个整数。<br>在日常开发中，我们常常会遇到更加复杂的问题：判断某个对象是否存在于某个集合中。例如在字处理时，判断字是否拼写正确（也就是判断它是否在已知的字典中）；在网络爬虫中，判断某个URL是否被访问过等等。在计算机中，我们通常用hash表来处理这一类问题。<br>hash表是前面所述数组的扩展，通过一系列算术操作（伪随机性函数）将对象转换为数组的索引位置，据此来实现在O(1)时间访问数组中的对象。</p>
+<h2 id="一、hash函数的选择">一、hash函数的选择</h2><p>(1)hash函数的目的是将对象转换为数组的索引。如何选择好的hash函数呢？有一条最重要的规则：<code>保证均匀性</code>。<br>即一个好的hash函数要能够将对象均匀的映射到数组中，保证均匀性的最好方法也许就是保证对象的每一位都参与hash值的运算。<br>这段程序是String类型hash值计算的简单实现，Java中的String类型默认使用了近似的方法。<br>可以看到，程序中将str的每一位都参与到hash值的运算中。<br>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a  href="/2015/06/13/HashTable&BloomFilter/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
   
     <article id="post-CommandFind" class="article article-type-post" itemscope itemprop="blogPost">
   

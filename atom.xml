@@ -5,7 +5,7 @@
   <subtitle><![CDATA[天天向上]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://ningquec.github.io//"/>
-  <updated>2015-08-03T14:55:25.493Z</updated>
+  <updated>2015-08-09T14:06:35.495Z</updated>
   <id>http://ningquec.github.io//</id>
   
   <author>
@@ -14,6 +14,63 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[Servlet学习笔记（一）]]></title>
+    <link href="http://ningquec.github.io/2015/08/09/ServletDay1/"/>
+    <id>http://ningquec.github.io/2015/08/09/ServletDay1/</id>
+    <published>2015-08-09T14:05:36.000Z</published>
+    <updated>2015-08-09T14:06:35.495Z</updated>
+    <content type="html"><![CDATA[<h2 id="一、servlet简介">一、servlet简介</h2><p>Servlet是Sun公司提供的一门用于开发动态web资源的技术。Servlet接受并且响应从客户端发送的请求，一般遵循http协议。<br>编写一个servlet的方法很简单：</p>
+<ul>
+<li>编写一个java类，实现servlet接口</li>
+<li>把开发好的java类部署到web服务器中</li>
+</ul>
+<p>servlet接口定义了一系列方法来进行：初始化servlet，响应请求、 从服务器移除servlet。<br>这些方法是生命周期相关的方法（life-cycle methods），并且按照以下顺序执行。</p>
+<ol>
+<li>servlet被创建时，调用初始化方法。init()</li>
+<li>客户端发出请求时，响应请求方法就被执行。service()</li>
+<li>servlet从服务器移除之时，调用移除的方法。 destroy()</li>
+</ol>
+<h2 id="二、service()方法响应请求过程">二、service()方法响应请求过程</h2><p>客户端通过service()方法与服务器端通信。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">service</span><span class="params">(ServletRequest req, ServletResponse res)</span> <span class="keyword">throws</span> ServletException, java.io.IOException</span></span><br></pre></td></tr></table></figure></p>
+<p>req是客户端发起的ServletRequest对象，res是服务器端相应的ServletResponse对象。</p>
+<p>例如一个简单的HelloWorld程序。</p>
+<ol>
+<li>在Tomcat中建立一个web应用。webapps/NewWebName/WEB-INF/classes目录</li>
+<li>在classes目录中建立FirstServlet.java。</li>
+<li>将servlet的支持jar包加入到环境变量中。</li>
+<li>在WEB-INF目录中建立web.xml文件，配置web文件对外访问路径。</li>
+<li>启动Tomcat。</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//FirstServlet.java</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">package</span> web.servlet;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"><span class="keyword">import</span> javax.sevlet.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FirstServlet</span> <span class="keyword">extends</span> <span class="title">GenericServlet</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">service</span><span class="params">(ServletRequest req, ServletResponse res)</span> <span class="keyword">throws</span> ServletException, java.io.IOException</span>&#123;</span><br><span class="line">		OutputStream out = res.getOutputStream();</span><br><span class="line">		out.write(<span class="string">"Hello, Servlet!!"</span>.getBytes());</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--     web.xml         --&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="pi">&lt;?xml version="1.0" encoding="ISO-8859-1"?&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="title">web-app</span> <span class="attribute">xmlns</span>=<span class="value">"http://java.sun.com/xml/ns/javaee"</span></span><br><span class="line">    <span class="attribute">xmlns:xsi</span>=<span class="value">"http://www.w3.org/2001/XMLSchema-instance"</span></span><br><span class="line">    <span class="attribute">xsi:schemaLocation</span>=<span class="value">"http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"</span></span><br><span class="line">    <span class="attribute">version</span>=<span class="value">"2.5"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">servlet</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">servlet-name</span>&gt;</span>FirstServlet<span class="tag">&lt;/<span class="title">servlet-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">servlet-class</span>&gt;</span>web.servlet.FirstServlet<span class="tag">&lt;/<span class="title">servlet-class</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">servlet</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="title">servlet-mapping</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">servlet-name</span>&gt;</span>FirstServlet<span class="tag">&lt;/<span class="title">servlet-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">url-pattern</span>&gt;</span>/FirstServlet<span class="tag">&lt;/<span class="title">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">servlet-mapping</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">web-app</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>下图详细说明了一个servlet的工作流程。<br><img src="http://7xjnnt.com1.z0.glb.clouddn.com/绘图1.jpg" alt="servlet顺序图"></p>
+<h2 id="三、HttpServlet类">三、HttpServlet类</h2><p>如果要implements Servlet接口，那么需要自己实现里面的每个方法。<br>SUN为了简便开发，提供了两个默认的实现类：GenericServlet和HttpServlet，我们只需要继承这两个实现类即可。</p>
+<p>HttpServlet指能够处理HttpServlet请求的Servlet，它在原有的接口上添加了一些Http协议处理方法，通常在开发中继承这一个类。<br>HttpServlet在实现接口时，重写了service()方法。接收来自 public service 方法的标准 HTTP 请求，并将它们分发给此类中定义的 doXXX 方法。此方法是 javax.servlet.Servlet#service 方法的特定于 HTTP 的版本。</p>
+<ul>
+<li>doGet，如果 servlet 支持 HTTP GET 请求</li>
+<li>doPost，用于 HTTP POST 请求</li>
+<li>doPut，用于 HTTP PUT 请求</li>
+<li>doDelete，用于 HTTP DELETE 请求</li>
+</ul>
+<h2 id="、servlet的一些重要细节">、servlet的一些重要细节</h2><h3 id="（1）地址映射">（1）地址映射</h3><p>由于客户端是通过URL地址访问web应用资源，所以Servlet程序要想被外部访问，一定要把servlet程序映射到一个URL地址上。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">web-app</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- </span><br><span class="line">	&lt;servlet-name&gt;设置servlet的名称；</span><br><span class="line">	&lt;servlet-class&gt;设置servlet的完整类名。</span><br><span class="line">--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">servlet</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">servlet-name</span>&gt;</span>FirstServlet<span class="tag">&lt;/<span class="title">servlet-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">servlet-class</span>&gt;</span>web.servlet.FirstServlet<span class="tag">&lt;/<span class="title">servlet-class</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">servlet</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!--</span><br><span class="line">	&lt;url-pattern&gt;设置Servlet的对外访问路径。</span><br><span class="line">--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">servlet-mapping</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">servlet-name</span>&gt;</span>FirstServlet<span class="tag">&lt;/<span class="title">servlet-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">url-pattern</span>&gt;</span>/FirstServlet<span class="tag">&lt;/<span class="title">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">servlet-mapping</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">web-app</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>同时要注意的是，同一个Servlet可以映射多个URL地址。</p>
+<h3 id="（2）Servlet对象创建">（2）Servlet对象创建</h3><p>针对客户端的多次Servlet请求，通常情况下，服务器只会创建一个Servlet对象。<br>也就是说，Servlet对象一旦创建，就会驻留在内存中，直至web容器退出，Servlet实例对象才会被摧毁。<br>在Servlet的整个生命周期内，init()方法只会被调用一次，而service()方法会因为多次请求而多次被调用。</p>
+<h3 id="（3）元素">（3）<load-on-start>元素</load-on-start></h3><p>如果在<servlet>元素中配置了<load-on-start>元素，那么web应用在启动时，就会装载并创建Servlet实例对象，以及调用init()方法。<br>比如，可以为web应用写一个InitServlet，这个Servlet会在启动时装载，为整个web应用创建必要的数据库表和数据。</load-on-start></servlet></p>
+<p><load-on-start>内的数字表示该Servlet的优先级，数字越小，优先级越高。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">load-on-start</span>&gt;</span>1<span class="tag">&lt;/<span class="title">load-on-start</span>&gt;</span></span><br></pre></td></tr></table></figure></load-on-start></p>
+<h3 id="（4）Servlet缺省设置">（4）Servlet缺省设置</h3><p>如果某个Servlet的映射路径仅仅是一个正斜杠“/”，那么这个Servlet就成为了缺省Servlet。凡是在web.xml文件中找不到匹配的<servlet-mapping>元素的URL，都一律交给缺省Servlet处理。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">servlet-mapping</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">servlet-name</span>&gt;</span>FirstServlet<span class="tag">&lt;/<span class="title">servlet-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">url-pattern</span>&gt;</span>/<span class="tag">&lt;/<span class="title">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">servlet-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure></servlet-mapping></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="一、servlet简介">一、servlet简介</h2><p>Servlet是Sun公司提供的一门用于开发动态web资源的技术。Servlet接受并且响应从客户端发送的请求，一般遵循http协议。<br>编写一个servlet的方法很简单：</p>
+<ul>
+<]]>
+    </summary>
+    
+      <category term="JavaWeb" scheme="http://ningquec.github.io/tags/JavaWeb/"/>
+    
+      <category term="Servlet" scheme="http://ningquec.github.io/tags/Servlet/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[怎么写一个www.baidu.com]]></title>
