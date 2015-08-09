@@ -23,7 +23,7 @@ servlet接口定义了一系列方法来进行：初始化servlet，响应请求
 
 servlet接口定义了一系列方法来进行：初始化servlet，响应请求、 从服务器移除servlet。这些方法是生">
 <meta property="og:image" content="http://7xjnnt.com1.z0.glb.clouddn.com/绘图1.jpg">
-<meta property="og:updated_time" content="2015-08-09T14:06:35.495Z">
+<meta property="og:updated_time" content="2015-08-09T14:09:37.137Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Servlet学习笔记（一）">
 <meta name="twitter:description" content="一、servlet简介Servlet是Sun公司提供的一门用于开发动态web资源的技术。Servlet接受并且响应从客户端发送的请求，一般遵循http协议。编写一个servlet的方法很简单：
@@ -224,6 +224,7 @@ servlet接口定义了一系列方法来进行：初始化servlet，响应请求
 <li>客户端发出请求时，响应请求方法就被执行。service()</li>
 <li>servlet从服务器移除之时，调用移除的方法。 destroy()</li>
 </ol>
+<a id="more"></a>
 <h2 id="二、service()方法响应请求过程">二、service()方法响应请求过程</h2><p>客户端通过service()方法与服务器端通信。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">service</span><span class="params">(ServletRequest req, ServletResponse res)</span> <span class="keyword">throws</span> ServletException, java.io.IOException</span></span><br></pre></td></tr></table></figure></p>
 <p>req是客户端发起的ServletRequest对象，res是服务器端相应的ServletResponse对象。</p>
 <p>例如一个简单的HelloWorld程序。</p>
