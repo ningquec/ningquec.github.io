@@ -101,7 +101,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/JavaWeb/" style="font-size: 12.5px;">JavaWeb</a> <a href="/tags/Linux/" style="font-size: 17.5px;">Linux</a> <a href="/tags/Servlet/" style="font-size: 10px;">Servlet</a> <a href="/tags/数据结构/" style="font-size: 15px;">数据结构</a> <a href="/tags/树/" style="font-size: 15px;">树</a> <a href="/tags/正则表达式/" style="font-size: 12.5px;">正则表达式</a> <a href="/tags/集合类/" style="font-size: 12.5px;">集合类</a>
+						<a href="/tags/Go/" style="font-size: 10px;">Go</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/JavaWeb/" style="font-size: 12px;">JavaWeb</a> <a href="/tags/Linux/" style="font-size: 18px;">Linux</a> <a href="/tags/Servlet/" style="font-size: 10px;">Servlet</a> <a href="/tags/数据结构/" style="font-size: 16px;">数据结构</a> <a href="/tags/树/" style="font-size: 14px;">树</a> <a href="/tags/正则表达式/" style="font-size: 12px;">正则表达式</a> <a href="/tags/集合类/" style="font-size: 12px;">集合类</a>
 					</div>
 				</section>
 				
@@ -160,6 +160,65 @@
 	</div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-ShellProgrammingSkills" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/07/10/ShellProgrammingSkills/" class="article-date">
+  	<time datetime="2015-07-10T13:21:27.000Z" itemprop="datePublished">2015-07-10</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/07/10/ShellProgrammingSkills/">shell脚本编程小技巧</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>总结的一些shell小技巧，时时更新中。。</p>
+<p>（1）使用&amp;&amp;和||的短路特性，假如传递了参数，PARAM=参数，否则给PARAM赋一个值。（简化if else）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[[ -n &#34;$1&#34; ]] &#38;&#38; PARAM=$1 || PARAM=value</span><br></pre></td></tr></table></figure></p>
+<p>（2）测试上一个命令的退出状态，将错误写入log文件。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[ $? &#8211;gt 0 ] &#38;&#38; echo &#39;Something Wrong, please investigate!&#39; &#62;&#62; $&#123;LOG_FILE&#125;</span><br></pre></td></tr></table></figure></p>
+<p>（3）脚本中产生的一些文件，比如log之类记得最后赋以合适的权限和群组。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find -type f -mtime -1 &#8211;user `whoami` -exec chmod 777 &#123;&#125; \;&#10;find -type f -mtime -1 &#8211;user `whoami` -exec chgrp group &#123;&#125; \;</span><br></pre></td></tr></table></figure></p>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a  href="/2015/07/10/ShellProgrammingSkills/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
   
     <article id="post-DataStructureRBT2" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -495,63 +554,6 @@
       
         <p class="article-more-link">
           <a  href="/2015/06/22/DataStructureBST/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
-    <article id="post-CommandGrep" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/06/16/CommandGrep/" class="article-date">
-  	<time datetime="2015-06-16T12:02:13.000Z" itemprop="datePublished">2015-06-16</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/06/16/CommandGrep/">grep 命令详解</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一、简介">一、简介</h2><p>grep: Gloabal Search Regular Expression and Print out the line，意为全局搜索正则表达式并打印文本行。所以<code>1.grep是一个强大的文本搜索工具</code> <code>2.grep与正则表达式联系紧密</code>，之后也会从这两个大的方面来详细介绍。grep命令的基本语法如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep [options] pattern [file...]</span><br></pre></td></tr></table></figure></p>
-<p>[options]表示选项，具体的命令选项见下表。pattern表示要匹配的模式（包括目标字符串、变量或者正则表达式），file表示要查询的文件名，可以是一个或者多个。pattern后面所有的字符串参数都会被理解为文件名。<br>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/06/16/CommandGrep/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>

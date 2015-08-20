@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="baidu-site-verification" content="jdIa3b5GkY" />
+  
+  <title>快速排序的两种方法（java &amp; Go实现） | Tyrone Li的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="快速排序的基本思想就是分治：
+
+选择一个基准数字
+将数组中比基准数字小的放在基准数字左边，大的放在右边
+对基准数字分成的两个区域重复第二步，直至每个区间只有一个数
+
+所以快速排序的平均时间复杂度为O(nlog_2n)。n是每一趟复杂度，log_2n则是分区的次数。下面两种方法都遵循分治的基本思想，所不同的只是分区的方法。
+一、挖坑法如图，每一趟排序的原理如下：
+
+把最左边的元素作为基准数字（也可以">
+<meta property="og:type" content="article">
+<meta property="og:title" content="快速排序的两种方法（java & Go实现）">
+<meta property="og:url" content="http://ningquec.github.io/2015/08/20/QuickSort/index.html">
+<meta property="og:site_name" content="Tyrone Li的博客">
+<meta property="og:description" content="快速排序的基本思想就是分治：
+
+选择一个基准数字
+将数组中比基准数字小的放在基准数字左边，大的放在右边
+对基准数字分成的两个区域重复第二步，直至每个区间只有一个数
+
+所以快速排序的平均时间复杂度为O(nlog_2n)。n是每一趟复杂度，log_2n则是分区的次数。下面两种方法都遵循分治的基本思想，所不同的只是分区的方法。
+一、挖坑法如图，每一趟排序的原理如下：
+
+把最左边的元素作为基准数字（也可以">
+<meta property="og:image" content="http://7xjnnt.com1.z0.glb.clouddn.com/52755791966578285.jpg">
+<meta property="og:image" content="http://7xjnnt.com1.z0.glb.clouddn.com/622715335369222192.jpg">
+<meta property="og:updated_time" content="2015-08-20T12:33:39.672Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="快速排序的两种方法（java & Go实现）">
+<meta name="twitter:description" content="快速排序的基本思想就是分治：
+
+选择一个基准数字
+将数组中比基准数字小的放在基准数字左边，大的放在右边
+对基准数字分成的两个区域重复第二步，直至每个区间只有一个数
+
+所以快速排序的平均时间复杂度为O(nlog_2n)。n是每一趟复杂度，log_2n则是分区的次数。下面两种方法都遵循分治的基本思想，所不同的只是分区的方法。
+一、挖坑法如图，每一趟排序的原理如下：
+
+把最左边的元素作为基准数字（也可以">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img lazy-src="http://7xjnnt.com1.z0.glb.clouddn.com/tyrone博客头像.png" class="js-avatar">
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Tyrone</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">天天向上</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="http://github.com/ningquec" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Go/" style="font-size: 10px;">Go</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/JavaWeb/" style="font-size: 12px;">JavaWeb</a> <a href="/tags/Linux/" style="font-size: 18px;">Linux</a> <a href="/tags/Servlet/" style="font-size: 10px;">Servlet</a> <a href="/tags/数据结构/" style="font-size: 16px;">数据结构</a> <a href="/tags/树/" style="font-size: 14px;">树</a> <a href="/tags/正则表达式/" style="font-size: 12px;">正则表达式</a> <a href="/tags/集合类/" style="font-size: 12px;">集合类</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">天天向上</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Tyrone</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="http://7xjnnt.com1.z0.glb.clouddn.com/tyrone博客头像.png" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Tyrone</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">天天向上</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="http://github.com/ningquec" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-QuickSort" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/08/20/QuickSort/" class="article-date">
+  	<time datetime="2015-08-20T12:29:47.000Z" itemprop="datePublished">2015-08-20</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      快速排序的两种方法（java &amp; Go实现）
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Go/">Go</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构/">数据结构</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>快速排序的基本思想就是分治：</p>
+<ol>
+<li>选择一个基准数字</li>
+<li>将数组中比基准数字小的放在基准数字左边，大的放在右边</li>
+<li>对基准数字分成的两个区域重复第二步，直至每个区间只有一个数</li>
+</ol>
+<p>所以快速排序的平均时间复杂度为O(nlog_2n)。n是每一趟复杂度，log_2n则是分区的次数。下面两种方法都遵循分治的基本思想，所不同的只是分区的方法。</p>
+<p>一、挖坑法<br>如图，每一趟排序的原理如下：</p>
+<ol>
+<li>把最左边的元素作为基准数字（也可以任意选择），储存在temp中，作为第一个“坑”</li>
+<li>i引用自区域最左边始，j引用自区域最右边始</li>
+<li>j从右向左遍历，当遇到比基准数字小的数字时，填入“坑”，原地形成一个“坑”</li>
+<li>i从左向右遍历，当遇到比基准数字大的数字时，填入“坑”，原地形成一个“坑”</li>
+<li>重复3,4步，直到i=j时候停下</li>
+<li>将基准数字放入i位置的“坑”中</li>
+</ol>
+<a id="more"></a>
+<p><img src="http://7xjnnt.com1.z0.glb.clouddn.com/52755791966578285.jpg" alt="挖坑法"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//java</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">QuickSort</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span> <span class="params">(String[] args)</span> <span class="keyword">throws</span> java.lang.Exception	</span>&#123;</span><br><span class="line">		<span class="keyword">int</span> [] array =&#123;<span class="number">2</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">7</span>,<span class="number">1</span>,<span class="number">65</span>,<span class="number">9</span>,<span class="number">7</span>,<span class="number">1</span>,<span class="number">2</span>&#125;;</span><br><span class="line">		<span class="keyword">new</span> QuickSort().sort(array,<span class="number">0</span>,array.length-<span class="number">1</span>);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i&lt;array.length;i++)</span><br><span class="line">		System.out.println(array[i]+ <span class="string">" "</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(<span class="keyword">int</span> [] array,<span class="keyword">int</span> left,<span class="keyword">int</span> right)</span></span>&#123;</span><br><span class="line">	    <span class="keyword">if</span>(left &lt; right)&#123;</span><br><span class="line">	        <span class="keyword">int</span> temp = array[left];</span><br><span class="line">		    <span class="keyword">int</span> i = left;</span><br><span class="line">		    <span class="keyword">int</span> j = right;</span><br><span class="line">		    <span class="keyword">while</span>(i&lt;j)&#123;</span><br><span class="line">		        <span class="keyword">while</span>(i&lt;j &amp;&amp; array[j] &gt;= temp)&#123;</span><br><span class="line">		            j--;</span><br><span class="line">		        &#125;</span><br><span class="line">		        <span class="keyword">if</span>(i&lt;j)&#123;</span><br><span class="line">		            array[i++] = array[j];</span><br><span class="line">		        &#125;</span><br><span class="line">		        <span class="keyword">while</span>(i&lt;j &amp;&amp; array[i] &lt; temp)&#123;</span><br><span class="line">		            i++;</span><br><span class="line">		        &#125;</span><br><span class="line">		        <span class="keyword">if</span>(i&lt;j)&#123;</span><br><span class="line">		            array[j--] = array[i];</span><br><span class="line">		        &#125;</span><br><span class="line">		    &#125;</span><br><span class="line">		    array[i] = temp;</span><br><span class="line">		    sort(array, left, i-<span class="number">1</span>);</span><br><span class="line">			sort(array, i+<span class="number">1</span>, right);</span><br><span class="line">	    &#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Go</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">func</span> quick(values []<span class="typename">int</span>, i <span class="typename">int</span>, j <span class="typename">int</span>) &#123;</span><br><span class="line">	<span class="keyword">if</span> i &lt; j &#123;</span><br><span class="line">		temp := values[i]</span><br><span class="line">		left := i</span><br><span class="line">		right := j</span><br><span class="line">		<span class="keyword">for</span> left &lt; right &#123;</span><br><span class="line">			<span class="keyword">for</span> left &lt; right &amp;&amp; values[right] &gt;= temp &#123;</span><br><span class="line">				right--</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span> left &lt; right &#123;</span><br><span class="line">				values[left] = values[right]</span><br><span class="line">				left++</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">for</span> left &lt; right &amp;&amp; values[left] &lt; temp &#123;</span><br><span class="line">				left++</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span> left &lt; right &#123;</span><br><span class="line">				values[right] = values[left]</span><br><span class="line">				right--</span><br><span class="line">			&#125;</span><br><span class="line">			values[left] = temp</span><br><span class="line">			quick(values, i, left-<span class="number">1</span>)</span><br><span class="line">			quick(values, left+<span class="number">1</span>, j)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">func</span> main() &#123;</span><br><span class="line">	values := []<span class="typename">int</span>&#123;<span class="number">1</span>, <span class="number">8</span>, <span class="number">7</span>, <span class="number">5</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">9</span>, <span class="number">0</span>&#125;</span><br><span class="line">	quick(values, <span class="number">0</span>, <span class="built_in">len</span>(values)-<span class="number">1</span>)</span><br><span class="line">	fmt.Print(values)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>二、优化版本<br>如图，每一趟排序的原理如下：</p>
+<ol>
+<li>将最右边的数字作为基准数字</li>
+<li>j指向最左边元素，i指向最左边元素的左边</li>
+<li>j向右遍历，找到比基准数字小的就停下，与++i位置上的数字交换</li>
+<li>重复3，直到j指向基准数字前一个</li>
+<li>交换基准数字和++i位置的数字</li>
+</ol>
+<p><img src="http://7xjnnt.com1.z0.glb.clouddn.com/622715335369222192.jpg" alt="优化版"><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//java</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">QuickSort</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span> <span class="params">(String[] args)</span> <span class="keyword">throws</span> java.lang.Exception	</span>&#123;</span><br><span class="line">		<span class="keyword">int</span> [] array =&#123;<span class="number">2</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">7</span>,<span class="number">1</span>,<span class="number">65</span>,<span class="number">9</span>,<span class="number">7</span>,<span class="number">1</span>,<span class="number">2</span>&#125;;</span><br><span class="line">		<span class="keyword">new</span> QuickSort().sort(array,<span class="number">0</span>,array.length-<span class="number">1</span>);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i&lt;array.length;i++)</span><br><span class="line">		System.out.println(array[i]+ <span class="string">" "</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(<span class="keyword">int</span> [] array,<span class="keyword">int</span> left,<span class="keyword">int</span> right)</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(left&lt;right)&#123;</span><br><span class="line">			<span class="keyword">int</span> i = left-<span class="number">1</span>;</span><br><span class="line">			<span class="keyword">int</span> j = left;</span><br><span class="line">			<span class="keyword">int</span> temp = array[right];</span><br><span class="line">			<span class="keyword">while</span>(j&lt;right)&#123;</span><br><span class="line">				<span class="keyword">while</span>(temp&lt;array[j])&#123;</span><br><span class="line">					j++;</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">if</span>(j&lt;right)&#123;</span><br><span class="line">					<span class="keyword">int</span> k = array[j];</span><br><span class="line">					array[j++] = array[++i];</span><br><span class="line">					array[i] = k;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			array[right] = array[++i];</span><br><span class="line">			array[i]=temp;</span><br><span class="line">			sort(array,left,i-<span class="number">1</span>);</span><br><span class="line">			sort(array,i+<span class="number">1</span>,right);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Go</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">func</span> sort(values []<span class="typename">int</span>, left <span class="typename">int</span> ,right <span class="typename">int</span>)&#123;</span><br><span class="line">	<span class="keyword">if</span> left&lt;right &#123;</span><br><span class="line">		temp := values[right]</span><br><span class="line">		i := left - <span class="number">1</span></span><br><span class="line">		j := left </span><br><span class="line">		<span class="keyword">for</span> j &lt; right &#123;</span><br><span class="line">			<span class="keyword">for</span> values[j] &gt; temp &#123;</span><br><span class="line">				j++</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span> i&lt;j&#123;</span><br><span class="line">				i++</span><br><span class="line">				values[i],values[j] = values[j],values[i]</span><br><span class="line">				j++</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		i++</span><br><span class="line">		temp,values[i] = values[i],temp</span><br><span class="line">		sort(values,left,i-<span class="number">1</span>)</span><br><span class="line">		sort(values,i+<span class="number">1</span>,right)			</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">func</span> main() &#123;</span><br><span class="line">	values := []<span class="typename">int</span> &#123;<span class="number">7</span>,<span class="number">8</span>,<span class="number">52</span>,<span class="number">1</span>,<span class="number">74</span>,<span class="number">5</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">4</span>,<span class="number">5</span>&#125;</span><br><span class="line">	sort(values,<span class="number">0</span>,<span class="built_in">len</span>(values)-<span class="number">1</span>)</span><br><span class="line">	fmt.Print(values)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/08/09/ServletDay1/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Servlet学习笔记（一）</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="QuickSort" data-title="快速排序的两种方法（java &amp; Go实现）" data-url="http://ningquec.github.io/2015/08/20/QuickSort/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2015 Tyrone
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/mobile.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+<! -- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+  </div>
+</body>
+</html>
