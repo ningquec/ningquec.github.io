@@ -101,7 +101,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/Go/" style="font-size: 10px;">Go</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/JavaWeb/" style="font-size: 12px;">JavaWeb</a> <a href="/tags/Linux/" style="font-size: 18px;">Linux</a> <a href="/tags/Servlet/" style="font-size: 10px;">Servlet</a> <a href="/tags/数据结构/" style="font-size: 16px;">数据结构</a> <a href="/tags/树/" style="font-size: 14px;">树</a> <a href="/tags/正则表达式/" style="font-size: 12px;">正则表达式</a> <a href="/tags/集合类/" style="font-size: 12px;">集合类</a>
+						<a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Go/" style="font-size: 10px;">Go</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/JavaWeb/" style="font-size: 12px;">JavaWeb</a> <a href="/tags/Linux/" style="font-size: 18px;">Linux</a> <a href="/tags/Servlet/" style="font-size: 10px;">Servlet</a> <a href="/tags/数据结构/" style="font-size: 16px;">数据结构</a> <a href="/tags/树/" style="font-size: 14px;">树</a> <a href="/tags/正则表达式/" style="font-size: 12px;">正则表达式</a> <a href="/tags/集合类/" style="font-size: 12px;">集合类</a>
 					</div>
 				</section>
 				
@@ -160,6 +160,80 @@
 	</div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-FirstAndroidProblem" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/01/13/FirstAndroidProblem/" class="article-date">
+  	<time datetime="2016-01-13T06:09:57.000Z" itemprop="datePublished">2016-01-13</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/01/13/FirstAndroidProblem/">Android Studio安装的几个坑</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、前言">一、前言</h2><p>毕设题目是做一个基于Android的字符识别。作为一个有Java基础（擅长hello world）的程序员，自下载Android Studio遭遇无数个坑，这里做一下记录。</p>
+<h2 id="二、坑">二、坑</h2><ol>
+<li>下载安装包看清楚自己需要的<br>官方的安装包都在墙外，下载速度不能保证，推荐网盘搜索~</li>
+<li><p>提示未安装build-tool-21.1.1<br><strong>解决办法：</strong></p>
+<ul>
+<li>下载<a href="http://dl-ssl.google.com/android/repository/build-tools_r21.1.1-windows.zip" target="_blank" rel="external">build-tools21.1.1（墙外）</a>，不能翻墙的就自己搜一下吧。</li>
+<li>C:\Users\&lt;用户名&gt;\AppData\Local\Android\sdk\build-tools，在本路径下建立新的文件夹：21.1.1。</li>
+<li>下载build-tools21.1.1解压，把文件夹中所有东西拷贝到21.1.1下。</li>
+<li>重启Android Studio。</li>
+</ul>
+</li>
+<li><p>运行APP出现：HAX is not working and emulator runs in emulation mode<br>安装HAXM时候设置的内存小于你AVD的内存，可能就会报这样的错误。<br><strong>解决办法：</strong></p>
+<ul>
+<li>调低AVD的内存，比如768M。</li>
+<li>重新安装HAXM，在<a href="https://software.intel.com/en-us/android/articles/intel-hardware-accelerated-execution-manager" target="_blank" rel="external">这儿</a>下载。<ul>
+<li>卸载原来的HAXM：控制面板-&gt;卸载Intel® Hardware Accelerated Execution Manager。</li>
+<li>安装下载的安装包，选择合适的内存。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
   
     <article id="post-QuickSort" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -537,69 +611,6 @@
 
 
   
-    <article id="post-CollectionHashMap" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/07/11/CollectionHashMap/" class="article-date">
-  	<time datetime="2015-07-11T05:36:49.000Z" itemprop="datePublished">2015-07-11</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/11/CollectionHashMap/">JDK1.8中的HashMap介绍和思考</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一、简介">一、简介</h2><blockquote>
-<p>HashMap是基于哈希表的Map接口的非同步实现。此实现提供所有可选的映射操作，并允许使用null值和null键。此类不保证映射的顺序，特别是它不保证该顺序恒久不变。</p>
-</blockquote>
-<ol>
-<li>用来存储键值对（Key-Value）。所以我们可以用它来快速匹配映射关系，例如词串的出现次数、国家的首都、小游戏中状态是否合法等等。</li>
-<li>是一个散列表。所以它存取较快，同时需要好的hash函数和碰撞处理。</li>
-</ol>
-<p>JDK1.8以前，HashMap采用“拉链法”来实现：如图，使用数组+链表来处理冲突。使用hash函数得到一个数组索引，同一个Hash值的键值对存储在一个链表里。<br><img src="http://7xjnnt.com1.z0.glb.clouddn.com/20130314151321_611.jpg?imageView2/0/w/400/" alt="拉链法图示"><br>当链表很长的时候，会导致查询速度变慢，所以在这个版本中，将链表做了一点小小的改动。当链表长度超过8时，链表将转化为一棵红黑树，这样查找时间就从O(n)降低到了O(log_2n)。下面就通过源码来讲解一下HashMap的具体实现。<br>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/集合类/">集合类</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/07/11/CollectionHashMap/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -610,7 +621,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2015 Tyrone
+    		&copy; 2016 Tyrone
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten

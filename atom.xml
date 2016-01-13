@@ -5,7 +5,7 @@
   <subtitle><![CDATA[天天向上]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://ningquec.github.io//"/>
-  <updated>2015-08-20T12:33:39.672Z</updated>
+  <updated>2016-01-13T06:11:00.708Z</updated>
   <id>http://ningquec.github.io//</id>
   
   <author>
@@ -14,6 +14,44 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[Android Studio安装的几个坑]]></title>
+    <link href="http://ningquec.github.io/2016/01/13/FirstAndroidProblem/"/>
+    <id>http://ningquec.github.io/2016/01/13/FirstAndroidProblem/</id>
+    <published>2016-01-13T06:09:57.000Z</published>
+    <updated>2016-01-13T06:11:00.708Z</updated>
+    <content type="html"><![CDATA[<h2 id="一、前言">一、前言</h2><p>毕设题目是做一个基于Android的字符识别。作为一个有Java基础（擅长hello world）的程序员，自下载Android Studio遭遇无数个坑，这里做一下记录。</p>
+<h2 id="二、坑">二、坑</h2><ol>
+<li>下载安装包看清楚自己需要的<br>官方的安装包都在墙外，下载速度不能保证，推荐网盘搜索~</li>
+<li><p>提示未安装build-tool-21.1.1<br><strong>解决办法：</strong></p>
+<ul>
+<li>下载<a href="http://dl-ssl.google.com/android/repository/build-tools_r21.1.1-windows.zip" target="_blank" rel="external">build-tools21.1.1（墙外）</a>，不能翻墙的就自己搜一下吧。</li>
+<li>C:\Users\&lt;用户名&gt;\AppData\Local\Android\sdk\build-tools，在本路径下建立新的文件夹：21.1.1。</li>
+<li>下载build-tools21.1.1解压，把文件夹中所有东西拷贝到21.1.1下。</li>
+<li>重启Android Studio。</li>
+</ul>
+</li>
+<li><p>运行APP出现：HAX is not working and emulator runs in emulation mode<br>安装HAXM时候设置的内存小于你AVD的内存，可能就会报这样的错误。<br><strong>解决办法：</strong></p>
+<ul>
+<li>调低AVD的内存，比如768M。</li>
+<li>重新安装HAXM，在<a href="https://software.intel.com/en-us/android/articles/intel-hardware-accelerated-execution-manager" target="_blank" rel="external">这儿</a>下载。<ul>
+<li>卸载原来的HAXM：控制面板-&gt;卸载Intel® Hardware Accelerated Execution Manager。</li>
+<li>安装下载的安装包，选择合适的内存。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="一、前言">一、前言</h2><p>毕设题目是做一个基于Android的字符识别。作为一个有Java基础（擅长hello world）的程序员，自下载Android Studio遭遇无数个坑，这里做一下记录。</p>
+<h2 id="二、坑">二、坑</h2><o]]>
+    </summary>
+    
+      <category term="Android" scheme="http://ningquec.github.io/tags/Android/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[快速排序的两种方法（java & Go实现）]]></title>

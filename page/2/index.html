@@ -101,7 +101,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/Go/" style="font-size: 10px;">Go</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/JavaWeb/" style="font-size: 12px;">JavaWeb</a> <a href="/tags/Linux/" style="font-size: 18px;">Linux</a> <a href="/tags/Servlet/" style="font-size: 10px;">Servlet</a> <a href="/tags/数据结构/" style="font-size: 16px;">数据结构</a> <a href="/tags/树/" style="font-size: 14px;">树</a> <a href="/tags/正则表达式/" style="font-size: 12px;">正则表达式</a> <a href="/tags/集合类/" style="font-size: 12px;">集合类</a>
+						<a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Go/" style="font-size: 10px;">Go</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/JavaWeb/" style="font-size: 12px;">JavaWeb</a> <a href="/tags/Linux/" style="font-size: 18px;">Linux</a> <a href="/tags/Servlet/" style="font-size: 10px;">Servlet</a> <a href="/tags/数据结构/" style="font-size: 16px;">数据结构</a> <a href="/tags/树/" style="font-size: 14px;">树</a> <a href="/tags/正则表达式/" style="font-size: 12px;">正则表达式</a> <a href="/tags/集合类/" style="font-size: 12px;">集合类</a>
 					</div>
 				</section>
 				
@@ -160,6 +160,69 @@
 	</div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-CollectionHashMap" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/07/11/CollectionHashMap/" class="article-date">
+  	<time datetime="2015-07-11T05:36:49.000Z" itemprop="datePublished">2015-07-11</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/07/11/CollectionHashMap/">JDK1.8中的HashMap介绍和思考</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、简介">一、简介</h2><blockquote>
+<p>HashMap是基于哈希表的Map接口的非同步实现。此实现提供所有可选的映射操作，并允许使用null值和null键。此类不保证映射的顺序，特别是它不保证该顺序恒久不变。</p>
+</blockquote>
+<ol>
+<li>用来存储键值对（Key-Value）。所以我们可以用它来快速匹配映射关系，例如词串的出现次数、国家的首都、小游戏中状态是否合法等等。</li>
+<li>是一个散列表。所以它存取较快，同时需要好的hash函数和碰撞处理。</li>
+</ol>
+<p>JDK1.8以前，HashMap采用“拉链法”来实现：如图，使用数组+链表来处理冲突。使用hash函数得到一个数组索引，同一个Hash值的键值对存储在一个链表里。<br><img src="http://7xjnnt.com1.z0.glb.clouddn.com/20130314151321_611.jpg?imageView2/0/w/400/" alt="拉链法图示"><br>当链表很长的时候，会导致查询速度变慢，所以在这个版本中，将链表做了一点小小的改动。当链表长度超过8时，链表将转化为一棵红黑树，这样查找时间就从O(n)降低到了O(log_2n)。下面就通过源码来讲解一下HashMap的具体实现。<br>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/集合类/">集合类</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a  href="/2015/07/11/CollectionHashMap/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
   
     <article id="post-ShellProgrammingSkills" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -509,66 +572,6 @@
 
 
   
-    <article id="post-DataStructureBST" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/06/22/DataStructureBST/" class="article-date">
-  	<time datetime="2015-06-22T07:28:51.000Z" itemprop="datePublished">2015-06-22</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/06/22/DataStructureBST/">树（一）：二叉查找树</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一、二叉查找树的基本特点">一、二叉查找树的基本特点</h2><blockquote>
-<p>二叉查找树的定义：二叉查找树（BST，又叫二叉排序树）是一棵二叉树，其中每一个节点都包含两个指向两个孩子的指针域和一个实现了comparable接口的数据域。并且，每个节点都大于其左子树任意节点，小于右子树中的任意节点。</p>
-</blockquote>
-<p>抄书完毕，那么为什要建立这样的一个数据结构呢？</p>
-<p>玩一个猜数字的游戏，1~64之间（假设目标数字为20）。<br>“1”  “低了”  “2”  “低了”  “3”  “低了”  “4” “低了”……     锲而不舍型要猜上20次。<br>“32”  “高了”  “16”  “低了”  “24”  “高了”  “20”  “答对了”     机智折半型只需要猜4次。<br>无论目标数字如何刁钻，采用折半的策略都能在log_2n次以内猜中。<br>因为这样每一次都能够排除掉一半的可能性，也就是说折半策略每一次都将问题的解空间折半。<br>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构/">数据结构</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/树/">树</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/06/22/DataStructureBST/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
@@ -579,7 +582,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2015 Tyrone
+    		&copy; 2016 Tyrone
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
