@@ -101,7 +101,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Go/" style="font-size: 10px;">Go</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/JavaWeb/" style="font-size: 12px;">JavaWeb</a> <a href="/tags/Linux/" style="font-size: 18px;">Linux</a> <a href="/tags/Servlet/" style="font-size: 10px;">Servlet</a> <a href="/tags/数据结构/" style="font-size: 16px;">数据结构</a> <a href="/tags/树/" style="font-size: 14px;">树</a> <a href="/tags/正则表达式/" style="font-size: 12px;">正则表达式</a> <a href="/tags/集合类/" style="font-size: 12px;">集合类</a>
+						<a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/C/" style="font-size: 10px;">C</a> <a href="/tags/Go/" style="font-size: 10px;">Go</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/JavaWeb/" style="font-size: 12px;">JavaWeb</a> <a href="/tags/Linux/" style="font-size: 18px;">Linux</a> <a href="/tags/OpenCV/" style="font-size: 10px;">OpenCV</a> <a href="/tags/Servlet/" style="font-size: 10px;">Servlet</a> <a href="/tags/数据结构/" style="font-size: 16px;">数据结构</a> <a href="/tags/树/" style="font-size: 14px;">树</a> <a href="/tags/正则表达式/" style="font-size: 12px;">正则表达式</a> <a href="/tags/集合类/" style="font-size: 12px;">集合类</a>
 					</div>
 				</section>
 				
@@ -160,6 +160,72 @@
 	</div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-RELinearEquation" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/07/14/RELinearEquation/" class="article-date">
+  	<time datetime="2015-07-14T11:22:24.000Z" itemprop="datePublished">2015-07-14</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/07/14/RELinearEquation/">正则表达式解决方程是否有解问题</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>部分译自<a href="http://blog.stevenlevithan.com/archives/algebra-with-regexes" target="_blank" rel="external">http://blog.stevenlevithan.com/archives/algebra-with-regexes</a></p>
+</blockquote>
+<p>正则表达式在数学上的应用是弱项。对于一个正则表达式引擎来说，0~9这10个字符是最为特殊的。</p>
+<p>必须说明Perl和PCRE是个例外，它们允许在匹配进程中的任何一点插入执行动态代码，这也显示了它们的巨大潜力。Perl可以在正则表达式中插入代码，PCRE可以调用外部函数。总的来说，用正则表达式解决数学问题是永远的隐痛。</p>
+<p>然而，最基本的正则表达式也可以榨出更多美味的汁来。它甚至可以<a href="http://coolshell.cn/articles/2704.html" target="_blank" rel="external">匹配素数</a>。下面的例子可能让你更加惊艳：<b>正则表达式能判断线性方程是否有解！</b></p>
+<p>基本正则表达式如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^(.*)\1&#123;A&#8722;1&#125;(.*)\2&#123;B&#8722;1&#125;$</span><br></pre></td></tr></table></figure></p>
+<p>其中A和B为占位符，使用时候用未知数的系数替换。这里会看的很迷糊，最下面再解释。例如17x+12y=51，A和B就被分别替换为17和12。如果我们将51的字符串代入来匹配，第一个子表达式结果会是3，第二个子表达式会是0，表示x=3，y=0，也就是说这个方程有解。如果方程无解，正则表达式就匹配失败；如果方程有多组解，正则表达式会匹配到x最大的情况。</p>
+<p>注意，这样只是看起来很酷。其实正则引擎匹配时会发生多次回溯，某些情况下效率相当低……</p>
+<hr>
+<p>首先介绍一下如何匹配，还是以17x+12y=51为例。<br>正则表达式代入A和B：<code>^(.*)\1{16}(.*)\2{11}$</code>。前半部分(.*)\1{16}表示先匹配一个(.*),即任意个重复字符，假定为“11”，那么然后会重复匹配16次“11”。后半部分同理。<br>在匹配的时候，我们会先把51转换为一个“11……11”（共51个1）的字符串，然后进行匹配。<br>我们之所以将A、B减去1是因为我们已经在子表达式中（括号中的部分）匹配了一次模式。</p>
+<p>下面说明一下其数学原理：<br>我们把(.*)看做是(1*)，即匹配若干个1。匹配成功的情况为：<br>1.匹配一个“111”，剩下51-3=448个1。<br>2.重复16次“111”，共16*3=48。<br>3.51个1匹配成功。<br>4.后半部分(.*)\2{11}重复匹配12次空串，(.*)此时为0个1。</p>
+<p>也就是说，正则表达式匹配方程是否有解其实是利用了类似穷举的方式。在最开始，正则引擎可能尝试了以17个空串开头、17个“1”开头、17个“11”开头的情况，类似于尝试17*0+12y=51、17*1+12y=51、17*2+12y=51，但都无法得出恰当的y来完成匹配。</p>
+<p>假如我想要匹配一个7位数，17x+12y=1700012。其中的一组解为x=100000，y=1，正则引擎要从0个1试验到100000个1开头……它看了这个七位数一眼，一眼就是万年……</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/正则表达式/">正则表达式</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
   
     <article id="post-CollectionHashMap" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -499,64 +565,6 @@
       
         <p class="article-more-link">
           <a  href="/2015/06/27/FileTreeInJava/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
-    <article id="post-Grep&amp;RE" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/06/26/Grep&RE/" class="article-date">
-  	<time datetime="2015-06-26T12:22:58.000Z" itemprop="datePublished">2015-06-26</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/06/26/Grep&RE/">grep与正则表达式</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a href="http://tyroneli.com/2015/06/16/grep-%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/">上回</a>说到grep与正则表达式关系紧密，今天来详细的谈一谈。</p>
-<h2 id="一、简介">一、简介</h2><p>正则表达式，让人不明觉厉，望而却步。但实际上它就相当于数学里的九九乘法表，背会很难，之后做乘法就很快了。<br>正则表达式也是这样的工具，看起来很难，背会了之后大有帮助。乘法表建立了乘法的基础规则，而正则表达式建立了一系列语法的规则。它是用来匹配符合某种语法的字符串，从而可以对这些筛选出来的字符串进行处理。</p>
-<p>所以天然的，在Linux中，grep命令经常与正则表达式结合起来执行一些模糊查询或者指向性查询。<br>比如一些常见的：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ll | grep -E &#34;*.txt&#34;  &#10;    #&#21015;&#20986;&#24403;&#21069;&#36335;&#24452;&#19979;&#30340;txt&#25991;&#20214;&#10;    #-E&#36873;&#39033;&#34920;&#31034;&#20351;&#29992;&#25193;&#23637;&#30340;&#27491;&#21017;&#34920;&#36798;&#24335;&#65292;grep -E&#30456;&#24403;&#20110;egrep&#10;    #&#34;*&#34;&#23601;&#26159;&#19968;&#31181;&#27491;&#21017;&#34920;&#36798;&#24335;&#30340;&#20803;&#23383;&#31526;</span><br></pre></td></tr></table></figure></p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/正则表达式/">正则表达式</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/06/26/Grep&RE/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>

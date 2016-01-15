@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="baidu-site-verification" content="jdIa3b5GkY" />
+  
+  <title>学习OpenCV：IplImage数据结构和ROI应用 | Tyrone Li的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="一、前言开始学习OpenCV，毕设和工作都要接触。希望能借此机会复习一下数学和C语言。另外插一句：
+
+大学课程无论看起来多么无用，以后都会是工作实践里的基石。
+
+二、OpenCV第一课：基本数据类型略去了OpenCV的安装过程，推荐浅墨博客。这里主要讲解OpenCV的常见数据结构。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="学习OpenCV：IplImage数据结构和ROI应用">
+<meta property="og:url" content="http://ningquec.github.io/2016/01/15/IplImageStructure/index.html">
+<meta property="og:site_name" content="Tyrone Li的博客">
+<meta property="og:description" content="一、前言开始学习OpenCV，毕设和工作都要接触。希望能借此机会复习一下数学和C语言。另外插一句：
+
+大学课程无论看起来多么无用，以后都会是工作实践里的基石。
+
+二、OpenCV第一课：基本数据类型略去了OpenCV的安装过程，推荐浅墨博客。这里主要讲解OpenCV的常见数据结构。">
+<meta property="og:image" content="http://7xjnnt.com1.z0.glb.clouddn.com/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20160115162236.png">
+<meta property="og:image" content="http://7xjnnt.com1.z0.glb.clouddn.com/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20160115105032.png">
+<meta property="og:image" content="http://7xjnnt.com1.z0.glb.clouddn.com/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20160115113607.png">
+<meta property="og:image" content="http://7xjnnt.com1.z0.glb.clouddn.com/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20160115151249.png">
+<meta property="og:image" content="http://7xjnnt.com1.z0.glb.clouddn.com/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20160115161941.png">
+<meta property="og:image" content="http://7xjnnt.com1.z0.glb.clouddn.com/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20160115161950.png">
+<meta property="og:image" content="http://7xjnnt.com1.z0.glb.clouddn.com/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20160115162006.png">
+<meta property="og:updated_time" content="2016-01-15T08:29:45.127Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="学习OpenCV：IplImage数据结构和ROI应用">
+<meta name="twitter:description" content="一、前言开始学习OpenCV，毕设和工作都要接触。希望能借此机会复习一下数学和C语言。另外插一句：
+
+大学课程无论看起来多么无用，以后都会是工作实践里的基石。
+
+二、OpenCV第一课：基本数据类型略去了OpenCV的安装过程，推荐浅墨博客。这里主要讲解OpenCV的常见数据结构。">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img lazy-src="http://7xjnnt.com1.z0.glb.clouddn.com/tyrone博客头像.png" class="js-avatar">
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Tyrone</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">天天向上</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="http://github.com/ningquec" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/C/" style="font-size: 10px;">C</a> <a href="/tags/Go/" style="font-size: 10px;">Go</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/JavaWeb/" style="font-size: 12px;">JavaWeb</a> <a href="/tags/Linux/" style="font-size: 18px;">Linux</a> <a href="/tags/OpenCV/" style="font-size: 10px;">OpenCV</a> <a href="/tags/Servlet/" style="font-size: 10px;">Servlet</a> <a href="/tags/数据结构/" style="font-size: 16px;">数据结构</a> <a href="/tags/树/" style="font-size: 14px;">树</a> <a href="/tags/正则表达式/" style="font-size: 12px;">正则表达式</a> <a href="/tags/集合类/" style="font-size: 12px;">集合类</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">天天向上</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Tyrone</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="http://7xjnnt.com1.z0.glb.clouddn.com/tyrone博客头像.png" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Tyrone</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">天天向上</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="http://github.com/ningquec" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-IplImageStructure" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/01/15/IplImageStructure/" class="article-date">
+  	<time datetime="2016-01-15T08:27:29.000Z" itemprop="datePublished">2016-01-15</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      学习OpenCV：IplImage数据结构和ROI应用
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenCV/">OpenCV</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="一、前言">一、前言</h1><p>开始学习OpenCV，毕设和工作都要接触。希望能借此机会复习一下数学和C语言。另外插一句：</p>
+<blockquote>
+<p>大学课程无论看起来多么无用，以后都会是工作实践里的基石。</p>
+</blockquote>
+<h1 id="二、OpenCV第一课：基本数据类型">二、OpenCV第一课：基本数据类型</h1><p>略去了OpenCV的安装过程，推荐浅墨博客。这里主要讲解OpenCV的常见数据结构。<br><a id="more"></a></p>
+<h2 id="1-_矩阵和图像类型">1. 矩阵和图像类型</h2><p>下图显示了如何在OpenCV中一幅图像是如何表示的。<br><img src="http://7xjnnt.com1.z0.glb.clouddn.com/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20160115162236.png" alt="在OpenCV中表示图像"><br>以上黑白图像是两维的，我们可以把图像分成很多个“点”，每个“点”都有一个明暗程度，用一个数值表示，这样就得到了一个矩阵。计算机里就是用这样的矩阵来表示图像的，<code>“点”被称为像素，它的值被称为灰度</code>。<br>这是黑白图像的情况。<br>假如是彩色图像，我们可以近似的看成，在黑白的基础上增加了一个色彩的维度。因为每一种颜色都可以分解为R、G、B三种颜色，所以我们分配三个矩阵来表示一副彩色图像。第一个矩阵表示Red的值，第二个表示Green，第三个表示Blue。实际应用中，我们把三个矩阵合成了一个：<br><img src="http://7xjnnt.com1.z0.glb.clouddn.com/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20160115105032.png" alt="彩色图像矩阵"></p>
+<ul>
+<li>注：OpenCV中，三种元素的排列顺序为BGR。</li>
+</ul>
+<p>OpenCV的C语言接口使用IplImage数据类型来编码图像。先来看一个实际的例子吧。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span> "stdafx.h"</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> "cv.h"              <span class="comment">//图像算法包</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> "highgui.h"         <span class="comment">//提供一些显示函数</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">	IplImage* img = cvLoadImage(<span class="string">"Lena.jpg"</span>, <span class="number">1</span>); <span class="comment">//加载图像，参数1表示加载彩色图像</span></span><br><span class="line">	<span class="keyword">if</span> (img != <span class="number">0</span>) &#123;   </span><br><span class="line">		cvNamedWindow(<span class="string">"Lena"</span>, <span class="number">1</span>);         <span class="comment">//命名窗口为“Lena”，参数1表示自动适应图像尺寸</span></span><br><span class="line">		cvShowImage(<span class="string">"Lena"</span>, img);</span><br><span class="line">		cvWaitKey(<span class="number">0</span>);                     <span class="comment">//按0退出窗口</span></span><br><span class="line">		cvDestroyWindow(<span class="string">"Lena"</span>);          <span class="comment">//C语言接口必须要手动释放内存，C++接口则不需要</span></span><br><span class="line">		cvReleaseImage(&amp;img);</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>结果图：<br><img src="http://7xjnnt.com1.z0.glb.clouddn.com/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20160115113607.png" alt="读取图像"><br>IplImage类派生自CvMat类，CvMat类派生自CvArr类，所以我们以后能经常看到函数的参数为CvArr*，把它简单的当做IplImage即可。这里是IplImage的结构。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> _IplImage&#123;</span><br><span class="line">	<span class="keyword">int</span> 				 nSize;</span><br><span class="line">	<span class="keyword">int</span> 				 ID;</span><br><span class="line">	<span class="keyword">int</span> 				 nChannels;        <span class="comment">//通道数，3表示彩色，单通道就是灰度图像</span></span><br><span class="line">	<span class="keyword">int</span> 				 AlphaChannel;</span><br><span class="line">	<span class="keyword">int</span> 				 depth;            <span class="comment">//深度，表示图像像素类型</span></span><br><span class="line">	<span class="keyword">int</span> 				 colorModel[<span class="number">4</span>];</span><br><span class="line">	<span class="keyword">int</span> 				 channelSeq[<span class="number">4</span>];</span><br><span class="line">	<span class="keyword">int</span> 				 dataOrder;</span><br><span class="line">	<span class="keyword">int</span> 				 origin;           <span class="comment">//设置坐标原点的位置</span></span><br><span class="line">	<span class="keyword">int</span> 				 align;</span><br><span class="line">	<span class="keyword">int</span> 				 width;            <span class="comment">//宽度</span></span><br><span class="line">	<span class="keyword">int</span> 				 height;           <span class="comment">//高度</span></span><br><span class="line">	<span class="keyword">struct</span> _IplROI* 	 roi;              <span class="comment">//感兴趣区域，可以单独对该区域操作</span></span><br><span class="line">	<span class="keyword">struct</span> _IplImage* 	 maskROI;</span><br><span class="line">	<span class="keyword">void</span>*				 imageID;</span><br><span class="line">	<span class="keyword">struct</span> _IplTailInfo* tileInfo;</span><br><span class="line">	<span class="keyword">int</span> 				 imageSize;</span><br><span class="line">	<span class="keyword">char</span>* 				 imageData;</span><br><span class="line">	<span class="keyword">int</span> 				 widthStep;        <span class="comment">//一行的字节数</span></span><br><span class="line">	<span class="keyword">int</span> 				 BorderMode[<span class="number">4</span>];</span><br><span class="line">	<span class="keyword">int</span> 				 BorderConst[<span class="number">4</span>];</span><br><span class="line">	<span class="keyword">char</span>* 				 imageDataOrigin;</span><br><span class="line">&#125; IplImage;</span><br></pre></td></tr></table></figure></p>
+<p>下面用一个例子看看IplImage的结构：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#include &#34;stdafx.h&#34;&#10;#include &#34;cv.h&#34;&#10;#include &#34;highgui.h&#34;&#10;&#10;int main(void)&#123;&#10;&#9;IplImage* img;&#10;&#9;if ((img = cvLoadImage(&#34;Lena.jpg&#34;, 1)) != 0) &#123;&#10;&#9;&#9;cvNamedWindow(&#34;Lena&#34;, 1);&#10;&#9;&#9;cvShowImage(&#34;Lena&#34;, img);&#10;&#9;&#9;cvWaitKey(0);&#10;&#9;&#9;printf(&#34;&#22270;&#20687;depth&#20026;: %d\n&#34;, img-&#62;depth);&#10;&#9;&#9;printf(&#34;&#22270;&#20687;width&#20026;: %d\n&#34;, img-&#62;width);&#10;&#9;&#9;printf(&#34;&#22270;&#20687;height&#20026;: %d\n&#34;, img-&#62;height);&#10;&#9;&#9;printf(&#34;&#22270;&#20687;widthStep&#20026;: %d\n&#34;, img-&#62;widthStep);&#10;&#9;&#9;cvDestroyWindow(&#34;Lena&#34;);&#10;&#9;&#9;cvReleaseImage(&#38;img);&#10;&#9;&#9;return 0;&#10;&#9;&#125;&#10;    return -1;&#10;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>结果图：<br><img src="http://7xjnnt.com1.z0.glb.clouddn.com/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20160115151249.png" alt="结果图"></p>
+<h2 id="2-_ROI详解">2. ROI详解</h2><p>计算机视觉的任务均为计算密集型，在很多情况下，使用ROI能提高计算机视觉代码的执行速度。这是因为设定ROI允许对图像的一小部分区域做操作，而不是对整个图像进行计算。设置ROI和取消ROI用<code>cvSetImageROI()</code>和<code>cvResetImageROI()</code>函数。<br>这里是一个利用ROI叠加图片的例子。先来看结果：<br>logo图片：<br><img src="http://7xjnnt.com1.z0.glb.clouddn.com/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20160115161941.png" alt="Logo图片"><br>南大北大楼图片：<br><img src="http://7xjnnt.com1.z0.glb.clouddn.com/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20160115161950.png" alt="南大北大楼"><br>结果图：<br><img src="http://7xjnnt.com1.z0.glb.clouddn.com/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20160115162006.png" alt="利用ROI合成图"><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span> "stdafx.h"</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;cv.h&gt;</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;highgui.h&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	IplImage* njuSrc = cvLoadImage(<span class="string">"NJU1.jpg"</span>, <span class="number">1</span>);</span><br><span class="line">	IplImage* logoSrc = cvLoadImage(<span class="string">"NJU2.jpg"</span>, <span class="number">1</span>);</span><br><span class="line">	IplImage* logo = cvCreateImage(CvSize(logoSrc-&gt;width/<span class="number">3</span>,logoSrc-&gt;height/<span class="number">3</span>),logoSrc-&gt;depth,logoSrc-&gt;nChannels);</span><br><span class="line">	cvResize(logoSrc, logo, <span class="number">1</span>);                            <span class="comment">//缩小logo图为原来的1/3</span></span><br><span class="line">	<span class="keyword">if</span> (njuSrc == <span class="number">0</span> || logo == <span class="number">0</span>) &#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"Fail to load image!"</span>);</span><br><span class="line">		<span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	IplImage* mask = cvCreateImage(CvSize(logoSrc-&gt;width / <span class="number">3</span>, logoSrc-&gt;height / <span class="number">3</span>), logoSrc-&gt;depth, <span class="number">1</span>);</span><br><span class="line">	cvCvtColor(logo, mask, CV_BGR2GRAY);                   <span class="comment">//制作掩膜图像</span></span><br><span class="line">	uchar* data = (uchar *)mask-&gt;imageData;</span><br><span class="line">	<span class="keyword">int</span> step = mask-&gt;widthStep / <span class="keyword">sizeof</span>(uchar);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; mask-&gt;width; i++) &#123;                <span class="comment">//将mask图像反色</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; mask-&gt;height; j++) &#123;</span><br><span class="line">			data[i*step + j] = <span class="number">255</span> - data[i*step + j];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	cvSetImageROI(njuSrc, cvRect(<span class="number">0</span>, <span class="number">0</span>, logo-&gt;width, logo-&gt;height));   <span class="comment">//设定ROI区域</span></span><br><span class="line">	cvCopy(logo, njuSrc,mask);                                        <span class="comment">//将logo拷贝到图像ROI区域中</span></span><br><span class="line">	cvNamedWindow(<span class="string">"ROI Test"</span>, <span class="number">1</span>);</span><br><span class="line">	cvShowImage(<span class="string">"ROI Test"</span>, njuSrc);</span><br><span class="line">	cvWaitKey(<span class="number">0</span>);</span><br><span class="line">	cvDestroyWindow(<span class="string">"ROI Test"</span>);</span><br><span class="line">	cvReleaseImage(&amp;njuSrc);</span><br><span class="line">	cvReleaseImage(&amp;logoSrc);</span><br><span class="line">	cvReleaseImage(&amp;logo);</span><br><span class="line">	cvReleaseImage(&amp;mask);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/01/13/FirstAndroidProblem/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Android Studio安装的几个坑</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="IplImageStructure" data-title="学习OpenCV：IplImage数据结构和ROI应用" data-url="http://ningquec.github.io/2016/01/15/IplImageStructure/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 Tyrone
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/mobile.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+<! -- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+  </div>
+</body>
+</html>
