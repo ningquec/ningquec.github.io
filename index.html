@@ -188,12 +188,14 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="一、简介">一、简介</h1><p>Highgui包为我们提供了trackbar（滑动条）的实现，利用它我们可以作很多事情。比如视频的拖放、动态传入参数等等。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cvCreateTrackbar(</span><br><span class="line">	<span class="keyword">const</span> <span class="keyword">char</span>* trackbar_name, </span><br><span class="line">	<span class="keyword">const</span> <span class="keyword">char</span>* window_name,</span><br><span class="line">    <span class="keyword">int</span>* value, </span><br><span class="line">    <span class="keyword">int</span> count, </span><br><span class="line">    <span class="function">CvTrackbarCallback on_change <span class="title">CV_DEFAULT</span><span class="params">(NULL)</span></span><br><span class="line">)</span></span><br></pre></td></tr></table></figure></p>
-<pre><code>-<span class="ruby"> 第一个参数：滑动条名称；
-</span>-<span class="ruby"> 第二个参数：窗口名称；
-</span>-<span class="ruby"> 第三个参数：滑动条的位置所代表的值；
-</span>-<span class="ruby"> 第四个参数：滑动条的最大值；
-</span>-<span class="ruby"> 第五个参数：回调函数。</span>
-</code></pre><h1 id="二、trackbar的几种用法">二、trackbar的几种用法</h1>
+<ul>
+<li>第一个参数：滑动条名称；</li>
+<li>第二个参数：窗口名称；</li>
+<li>第三个参数：滑动条的位置所代表的值；</li>
+<li>第四个参数：滑动条的最大值；</li>
+<li>第五个参数：回调函数。</li>
+</ul>
+<h1 id="二、trackbar的几种用法">二、trackbar的几种用法</h1>
       
     </div>
     
