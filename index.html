@@ -101,7 +101,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/C/" style="font-size: 10px;">C</a> <a href="/tags/Go/" style="font-size: 10px;">Go</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/JavaWeb/" style="font-size: 12px;">JavaWeb</a> <a href="/tags/Linux/" style="font-size: 18px;">Linux</a> <a href="/tags/OpenCV/" style="font-size: 10px;">OpenCV</a> <a href="/tags/Servlet/" style="font-size: 10px;">Servlet</a> <a href="/tags/数据结构/" style="font-size: 16px;">数据结构</a> <a href="/tags/树/" style="font-size: 14px;">树</a> <a href="/tags/正则表达式/" style="font-size: 12px;">正则表达式</a> <a href="/tags/集合类/" style="font-size: 12px;">集合类</a>
+						<a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/C/" style="font-size: 12px;">C</a> <a href="/tags/Go/" style="font-size: 10px;">Go</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/JavaWeb/" style="font-size: 12px;">JavaWeb</a> <a href="/tags/Linux/" style="font-size: 18px;">Linux</a> <a href="/tags/OpenCV/" style="font-size: 10px;">OpenCV</a> <a href="/tags/Opencv/" style="font-size: 10px;">Opencv</a> <a href="/tags/Servlet/" style="font-size: 10px;">Servlet</a> <a href="/tags/数据结构/" style="font-size: 16px;">数据结构</a> <a href="/tags/树/" style="font-size: 14px;">树</a> <a href="/tags/正则表达式/" style="font-size: 12px;">正则表达式</a> <a href="/tags/集合类/" style="font-size: 12px;">集合类</a>
 					</div>
 				</section>
 				
@@ -160,6 +160,68 @@
 	</div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-OpenCVTrackbar" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/01/18/OpenCVTrackbar/" class="article-date">
+  	<time datetime="2016-01-18T07:07:28.000Z" itemprop="datePublished">2016-01-18</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/01/18/OpenCVTrackbar/">学习OpenCV：Trackbar的几种用法</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="一、简介">一、简介</h1><p>Highgui包为我们提供了trackbar（滑动条）的实现，利用它我们可以作很多事情。比如视频的拖放、动态传入参数等等。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cvCreateTrackbar(</span><br><span class="line">	<span class="keyword">const</span> <span class="keyword">char</span>* trackbar_name, </span><br><span class="line">	<span class="keyword">const</span> <span class="keyword">char</span>* window_name,</span><br><span class="line">    <span class="keyword">int</span>* value, </span><br><span class="line">    <span class="keyword">int</span> count, </span><br><span class="line">    <span class="function">CvTrackbarCallback on_change <span class="title">CV_DEFAULT</span><span class="params">(NULL)</span></span><br><span class="line">)</span></span><br></pre></td></tr></table></figure></p>
+<pre><code>-<span class="ruby"> 第一个参数：滑动条名称；
+</span>-<span class="ruby"> 第二个参数：窗口名称；
+</span>-<span class="ruby"> 第三个参数：滑动条的位置所代表的值；
+</span>-<span class="ruby"> 第四个参数：滑动条的最大值；
+</span>-<span class="ruby"> 第五个参数：回调函数。</span>
+</code></pre><h1 id="二、trackbar的几种用法">二、trackbar的几种用法</h1>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Opencv/">Opencv</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a  href="/2016/01/18/OpenCVTrackbar/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
   
     <article id="post-IplImageStructure" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -534,62 +596,6 @@
       
         <p class="article-more-link">
           <a  href="/2015/07/28/HowToInterview/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
-    <article id="post-JavaStatic" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/07/25/JavaStatic/" class="article-date">
-  	<time datetime="2015-07-25T03:11:29.000Z" itemprop="datePublished">2015-07-25</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/25/JavaStatic/">Static的一些实验</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>java中，一切都是对象。我们通常先new出类的实例：对象，然后通过对象来操作变量和方法。<br>事无绝对，有些情况下我们也需要“全局”的变量和方法。</p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/07/25/JavaStatic/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>
