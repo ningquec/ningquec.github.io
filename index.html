@@ -101,7 +101,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/C/" style="font-size: 12px;">C</a> <a href="/tags/Go/" style="font-size: 10px;">Go</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/JavaWeb/" style="font-size: 12px;">JavaWeb</a> <a href="/tags/Linux/" style="font-size: 18px;">Linux</a> <a href="/tags/OpenCV/" style="font-size: 10px;">OpenCV</a> <a href="/tags/Opencv/" style="font-size: 10px;">Opencv</a> <a href="/tags/Servlet/" style="font-size: 10px;">Servlet</a> <a href="/tags/数据结构/" style="font-size: 16px;">数据结构</a> <a href="/tags/树/" style="font-size: 14px;">树</a> <a href="/tags/正则表达式/" style="font-size: 12px;">正则表达式</a> <a href="/tags/集合类/" style="font-size: 12px;">集合类</a>
+						<a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/C/" style="font-size: 14px;">C</a> <a href="/tags/Go/" style="font-size: 10px;">Go</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/JavaWeb/" style="font-size: 12px;">JavaWeb</a> <a href="/tags/Linux/" style="font-size: 18px;">Linux</a> <a href="/tags/OpenCV/" style="font-size: 14px;">OpenCV</a> <a href="/tags/Servlet/" style="font-size: 10px;">Servlet</a> <a href="/tags/数据结构/" style="font-size: 16px;">数据结构</a> <a href="/tags/树/" style="font-size: 14px;">树</a> <a href="/tags/正则表达式/" style="font-size: 12px;">正则表达式</a> <a href="/tags/集合类/" style="font-size: 12px;">集合类</a>
 					</div>
 				</section>
 				
@@ -161,6 +161,62 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-OpenCVfindDataMatrix" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/01/19/OpenCVfindDataMatrix/" class="article-date">
+  	<time datetime="2016-01-19T07:23:32.000Z" itemprop="datePublished">2016-01-19</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/01/19/OpenCVfindDataMatrix/">学习OpenCV：寻找图像中的Data Matrix区域（1）</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="一、简介">一、简介</h1><p>Data Matrix是二维码的一种，最大特点就是密度高，其最小尺寸是目前所有条码中最小的。Data Matrix码不同于QR码，由寻边区和数据区组成。<br><img src="http://7xjnnt.com1.z0.glb.clouddn.com/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20160119174505.png" alt="Data Matrix"><br>这里不对编码具体的细节作介绍，目的主要是根据Data Matrix的特点（“L型”边界）来寻找图像中的疑似Data Matrix区域，这需要很多图像处理算法的结合。<br>图像处理有一个很重要的特征：受到实际情况的影响非常大，同样的算法，可能换个场景就完全失效了。所以，本文就从探索的过程谈起，说一下OpenCV的常见处理算法。<br>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenCV/">OpenCV</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a  href="/2016/01/19/OpenCVfindDataMatrix/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+  
     <article id="post-OpenCVTrackbar" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -202,7 +258,7 @@
     <div class="article-info article-info-index">
       
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Opencv/">Opencv</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenCV/">OpenCV</a></li></ul>
 	</div>
 
       
@@ -553,69 +609,9 @@
 
 
   
-    <article id="post-HowToInterview" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/07/28/HowToInterview/" class="article-date">
-  	<time datetime="2015-07-28T12:27:30.000Z" itemprop="datePublished">2015-07-28</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/28/HowToInterview/">面试的那些事</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在java研发的面试中，有一些问题的出现频度非常的高。<br>为什么面试官们总是喜欢问集合类，喜欢问多线程？为什么希望我们掌握spring框架，掌握sql，掌握web相关知识？<br>如果在求职网站上做一下简单的统计，爬取公司的招聘简章，不难发现规律。java相关职位的热词前6名分别是<b>java，spring，web，mysql，Oracle，Linux</b>。</p>
-<p>我们可以从以上获悉一些职业的知识需求以及未来的发展方向。</p>
-<ul>
-<li>注：以下只是个人见解，妄自揣测，并不一定准确。</li>
-</ul>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/07/28/HowToInterview/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 </div>

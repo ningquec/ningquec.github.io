@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="baidu-site-verification" content="jdIa3b5GkY" />
+  
+  <title>学习OpenCV：寻找图像中的Data Matrix区域（1） | Tyrone Li的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="一、简介Data Matrix是二维码的一种，最大特点就是密度高，其最小尺寸是目前所有条码中最小的。Data Matrix码不同于QR码，由寻边区和数据区组成。这里不对编码具体的细节作介绍，目的主要是根据Data Matrix的特点（“L型”边界）来寻找图像中的疑似Data Matrix区域，这需要很多图像处理算法的结合。图像处理有一个很重要的特征：受到实际情况的影响非常大，同样的算法，可能换个场">
+<meta property="og:type" content="article">
+<meta property="og:title" content="学习OpenCV：寻找图像中的Data Matrix区域（1）">
+<meta property="og:url" content="http://ningquec.github.io/2016/01/19/OpenCVfindDataMatrix/index.html">
+<meta property="og:site_name" content="Tyrone Li的博客">
+<meta property="og:description" content="一、简介Data Matrix是二维码的一种，最大特点就是密度高，其最小尺寸是目前所有条码中最小的。Data Matrix码不同于QR码，由寻边区和数据区组成。这里不对编码具体的细节作介绍，目的主要是根据Data Matrix的特点（“L型”边界）来寻找图像中的疑似Data Matrix区域，这需要很多图像处理算法的结合。图像处理有一个很重要的特征：受到实际情况的影响非常大，同样的算法，可能换个场">
+<meta property="og:image" content="http://7xjnnt.com1.z0.glb.clouddn.com/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20160119174505.png">
+<meta property="og:image" content="http://7xjnnt.com1.z0.glb.clouddn.com/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20160122151624.png">
+<meta property="og:image" content="http://7xjnnt.com1.z0.glb.clouddn.com/initpintu1.jpg">
+<meta property="og:image" content="http://7xjnnt.com1.z0.glb.clouddn.com/12.jpg">
+<meta property="og:image" content="http://7xjnnt.com1.z0.glb.clouddn.com/123.jpg">
+<meta property="og:image" content="http://7xjnnt.com1.z0.glb.clouddn.com/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20160122172612_%E5%89%AF%E6%9C%AC.png">
+<meta property="og:updated_time" content="2016-01-22T09:47:47.752Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="学习OpenCV：寻找图像中的Data Matrix区域（1）">
+<meta name="twitter:description" content="一、简介Data Matrix是二维码的一种，最大特点就是密度高，其最小尺寸是目前所有条码中最小的。Data Matrix码不同于QR码，由寻边区和数据区组成。这里不对编码具体的细节作介绍，目的主要是根据Data Matrix的特点（“L型”边界）来寻找图像中的疑似Data Matrix区域，这需要很多图像处理算法的结合。图像处理有一个很重要的特征：受到实际情况的影响非常大，同样的算法，可能换个场">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img lazy-src="http://7xjnnt.com1.z0.glb.clouddn.com/tyrone博客头像.png" class="js-avatar">
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Tyrone</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">天天向上</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="http://github.com/ningquec" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/C/" style="font-size: 14px;">C</a> <a href="/tags/Go/" style="font-size: 10px;">Go</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/JavaWeb/" style="font-size: 12px;">JavaWeb</a> <a href="/tags/Linux/" style="font-size: 18px;">Linux</a> <a href="/tags/OpenCV/" style="font-size: 14px;">OpenCV</a> <a href="/tags/Servlet/" style="font-size: 10px;">Servlet</a> <a href="/tags/数据结构/" style="font-size: 16px;">数据结构</a> <a href="/tags/树/" style="font-size: 14px;">树</a> <a href="/tags/正则表达式/" style="font-size: 12px;">正则表达式</a> <a href="/tags/集合类/" style="font-size: 12px;">集合类</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">天天向上</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Tyrone</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="http://7xjnnt.com1.z0.glb.clouddn.com/tyrone博客头像.png" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Tyrone</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">天天向上</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="http://github.com/ningquec" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-OpenCVfindDataMatrix" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/01/19/OpenCVfindDataMatrix/" class="article-date">
+  	<time datetime="2016-01-19T07:23:32.000Z" itemprop="datePublished">2016-01-19</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      学习OpenCV：寻找图像中的Data Matrix区域（1）
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenCV/">OpenCV</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="一、简介">一、简介</h1><p>Data Matrix是二维码的一种，最大特点就是密度高，其最小尺寸是目前所有条码中最小的。Data Matrix码不同于QR码，由寻边区和数据区组成。<br><img src="http://7xjnnt.com1.z0.glb.clouddn.com/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20160119174505.png" alt="Data Matrix"><br>这里不对编码具体的细节作介绍，目的主要是根据Data Matrix的特点（“L型”边界）来寻找图像中的疑似Data Matrix区域，这需要很多图像处理算法的结合。<br>图像处理有一个很重要的特征：受到实际情况的影响非常大，同样的算法，可能换个场景就完全失效了。所以，本文就从探索的过程谈起，说一下OpenCV的常见处理算法。<br><a id="more"></a></p>
+<h1 id="二、图像处理">二、图像处理</h1><h2 id="1-灰度化">1.灰度化</h2><p>图像灰度化，将多通道彩色图像转换为单通道灰度图像，能大大降低计算机的计算难度。很多算法都只适用于灰度图像，对于二维码识别来说，本身就是由深色块和浅色块表示的“1”和“0”构成，转换为灰度图像是很自然的。<br>灰度图像是仅包含亮度信息不包含色彩信息的图像,把亮度值量化等分成O~255共256个级别,O最暗(全黑)、255最亮(全白)。常见的转为灰度计算公式为为Gray=O.299R+0.587G+0.114B，OpenCV中提供了直接的函数调用：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">cvCvtColor</span><span class="params">(<span class="keyword">const</span> CvArr* src, CvArr* dst, CV_BGR2GRAY)</span></span>;</span><br></pre></td></tr></table></figure></p>
+<p>前两个参数为输入图像和输出图像，第三个用来指定具体的颜色空间转换。本例中将彩色图像转换为灰度图像，所以第三个参数为<code>CV_BGR2RGB</code>。需要注意，原始图像和目标图像的尺寸和深度应保持一致。</p>
+<h2 id="2-平滑">2.平滑</h2><p>平滑也称为模糊，现实采集到的图像都存在有大量的噪声，非常影响下一步的计算，需要对其进行平滑处理，降低噪声。比如下图：<br><img src="http://7xjnnt.com1.z0.glb.clouddn.com/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20160122151624.png" alt="降噪"><br>其中difference图片将处理前后的照片相减，可以明显的看出平滑的效果。<br>噪声是存在于图像中的普遍现象。假设，一幅图像中的像素值分布为{1, 1, 1, 1, 10, 1}，其中，10为噪点，我们对其采用中值平滑操作，将每一个值变为其邻域的中值，10就被置换为1了，达到降噪的目的。<br>在OpenCV中，提供了<code>cvSmooth</code>函数，其中包括五种常见的平滑操作：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">cvSmooth</span><span class="params">(<span class="keyword">const</span> CvArr* src, </span><br><span class="line">              CvArr* dst, </span><br><span class="line">              <span class="keyword">int</span> smoothtype = CV_GAUSSIAN,</span><br><span class="line">              <span class="keyword">int</span> param1 = 3,</span><br><span class="line">              <span class="keyword">int</span> param2 = 0,</span><br><span class="line">              <span class="keyword">int</span> param3 = 0,</span><br><span class="line">              <span class="keyword">int</span> param4 = 0</span><br><span class="line">             )</span></span>;</span><br></pre></td></tr></table></figure></p>
+<p>前两个参数为输入和输出图像；soomothtype为平滑操作的类型：包括简单平滑（CV_BLUR）、简单无缩放变换平滑（CV_BLUR_NO_SCALE）、中值平滑（CV_MEDIAN）、高斯平滑（CV_GAUSSIAN）、双边滤波（CV_BILATERAL）；剩下的参数可以简单理解为平滑的核大小，不同操作代表的含义也有细小差别。用一个实际的例子来说明。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span> "stdafx.h"</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;cv.h&gt;</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;highgui.h&gt;</span></span><br><span class="line"></span><br><span class="line">IplImage* src;</span><br><span class="line">IplImage* gray;</span><br><span class="line">IplImage* blur;</span><br><span class="line">IplImage* noScaleBlur;</span><br><span class="line">IplImage* gaussian;</span><br><span class="line">IplImage* median;</span><br><span class="line">IplImage* bilateral;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">smooth</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</span><br><span class="line">	src = cvLoadImage(<span class="string">"F:\\opencv_pic\\datamatrix8.png"</span>, <span class="number">1</span>);</span><br><span class="line">	<span class="keyword">if</span> (src == <span class="number">0</span>) &#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"Can't load the data matrix image!"</span>);</span><br><span class="line">		<span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	cvNamedWindow(<span class="string">"src"</span>, <span class="number">1</span>);</span><br><span class="line">	cvShowImage(<span class="string">"src"</span>, src);</span><br><span class="line"></span><br><span class="line">	gray = cvCreateImage(CvSize(src-&gt;width, src-&gt;height), src-&gt;depth, <span class="number">1</span>);</span><br><span class="line">	cvCvtColor(src, gray, CV_BGR2GRAY);</span><br><span class="line">	smooth();</span><br><span class="line">	cvWaitKey(<span class="number">0</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">smooth</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	blur = cvCreateImage(cvGetSize(gray), gray-&gt;depth, gray-&gt;nChannels);</span><br><span class="line">	cvSmooth(gray, blur, CV_BLUR, <span class="number">7</span>, <span class="number">7</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">	cvNamedWindow(<span class="string">"blur"</span>, <span class="number">1</span>);</span><br><span class="line">	cvShowImage(<span class="string">"blur"</span>, blur);</span><br><span class="line"></span><br><span class="line">	<span class="comment">//无缩放变换的平滑比较特殊，输入和输出的数据类型不能相同，只能输出16S和32f</span></span><br><span class="line">	noScaleBlur = cvCreateImage(cvGetSize(gray), IPL_DEPTH_16S, gray-&gt;nChannels);</span><br><span class="line">	cvSmooth(gray, noScaleBlur, CV_BLUR_NO_SCALE, <span class="number">7</span>, <span class="number">7</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">	cvNamedWindow(<span class="string">"noScaleBlur"</span>, <span class="number">1</span>);</span><br><span class="line">	cvShowImage(<span class="string">"noScaleBlur"</span>, noScaleBlur);</span><br><span class="line"></span><br><span class="line">	median = cvCreateImage(cvGetSize(gray), gray-&gt;depth, gray-&gt;nChannels);</span><br><span class="line">	cvSmooth(gray, median, CV_MEDIAN, <span class="number">7</span>, <span class="number">7</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">	cvNamedWindow(<span class="string">"median"</span>, <span class="number">1</span>);</span><br><span class="line">	cvShowImage(<span class="string">"median"</span>, median);</span><br><span class="line"></span><br><span class="line">	median = cvCreateImage(cvGetSize(gray), gray-&gt;depth, gray-&gt;nChannels);</span><br><span class="line">	cvSmooth(gray, median, CV_MEDIAN, <span class="number">7</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">	cvNamedWindow(<span class="string">"median"</span>, <span class="number">1</span>);</span><br><span class="line">	cvShowImage(<span class="string">"median"</span>, median);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//高斯平滑的原理可以参看http://www.ruanyifeng.com/blog/2012/11/gaussian_blur.html</span></span><br><span class="line">	gaussian = cvCreateImage(cvGetSize(gray), gray-&gt;depth, gray-&gt;nChannels);</span><br><span class="line">	cvSmooth(gray, gaussian, CV_GAUSSIAN, <span class="number">7</span>, <span class="number">7</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">	cvNamedWindow(<span class="string">"gaussian"</span>, <span class="number">1</span>);</span><br><span class="line">	cvShowImage(<span class="string">"gaussian"</span>, gaussian);</span><br><span class="line"></span><br><span class="line">	<span class="comment">//在双边滤波操作中，param1代表高斯核的宽度，与高斯平滑相同；param2越大，表明待滤波的强度范围越大</span></span><br><span class="line">	bilateral = cvCreateImage(cvGetSize(gray), gray-&gt;depth, gray-&gt;nChannels);</span><br><span class="line">	cvSmooth(gray, bilateral, CV_BILATERAL, <span class="number">7</span>, <span class="number">7</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">	cvNamedWindow(<span class="string">"bilateral"</span>, <span class="number">1</span>);</span><br><span class="line">	cvShowImage(<span class="string">"bilateral"</span>, bilateral);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>效果图：<br><img src="http://7xjnnt.com1.z0.glb.clouddn.com/initpintu1.jpg" alt="平滑操作效果"><br>从左至右从上到下依次为：原图、简单平滑、简单无缩放变换平滑、中值平滑、高斯平滑、双边滤波。<br>本例中采取了7作为核的大小，是为了更好的看出各平滑操作的区别。实际操作中要根据具体情况分析，通常会搭配多种平滑操作以期取得最好的效果。<br>为了以后操作的考量，需要保留图像的边缘，以便提取出Data Matrix的特征，建议保留双边滤波。这种平滑操作较之高斯平滑，能够保留边缘，但是需要更多的处理时间。</p>
+<h2 id="3-二值化">3.二值化</h2><p>图像二值化是将具有多个灰度级的灰度图像转换为只有两个灰度的黑白图像，便于特征提取。OpenCV提供了单一阈值和自适应阈值两个函数：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//单一阈值</span></span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">cvThresold</span><span class="params">(CvArr* src, CvArr* dst, <span class="keyword">double</span> threshold, <span class="keyword">double</span> max_value, <span class="keyword">int</span> threshold_type)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//自适应阈值</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">cvAdaptiveThreshold</span><span class="params">(CvArr* src, CvArr* dst, <span class="keyword">double</span> max_val,</span><br><span class="line">                         <span class="keyword">int</span> adaptive_method = CV_ADAPTIVE_THRESH_MEAN_C,</span><br><span class="line">                         <span class="keyword">int</span> threshold_type = CV_THRESH_BINARY,</span><br><span class="line">                         <span class="keyword">int</span> block_size = 3, <span class="keyword">double</span> param1 = 5</span><br><span class="line">                        )</span></span>;</span><br></pre></td></tr></table></figure></p>
+<p>直接来看示例：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span> "stdafx.h"</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;cv.h&gt;</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;highgui.h&gt;</span></span><br><span class="line"></span><br><span class="line">IplImage* src;</span><br><span class="line">IplImage* gray;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">binaryImage</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</span><br><span class="line">	src = cvLoadImage(<span class="string">"F:\\opencv_pic\\datamatrix1.jpg"</span>, <span class="number">1</span>);</span><br><span class="line">	<span class="keyword">if</span> (src == <span class="number">0</span>) &#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"Can't load the data matrix image!"</span>);</span><br><span class="line">		<span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	cvNamedWindow(<span class="string">"src"</span>, <span class="number">1</span>);</span><br><span class="line">	cvShowImage(<span class="string">"src"</span>, src);</span><br><span class="line">	gray = cvCreateImage(CvSize(src-&gt;width, src-&gt;height), src-&gt;depth, <span class="number">1</span>);</span><br><span class="line">	cvCvtColor(src, gray, CV_BGR2GRAY);</span><br><span class="line">	binaryImage();</span><br><span class="line">	cvWaitKey(<span class="number">0</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">binaryImage</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	it = cvCreateImage(cvGetSize(gray), gray-&gt;depth, gray-&gt;nChannels);</span><br><span class="line">	cvThreshold(gray, it, <span class="number">100</span>, <span class="number">255</span>, CV_THRESH_BINARY);</span><br><span class="line">	cvNamedWindow(<span class="string">"it"</span>, <span class="number">1</span>);</span><br><span class="line">	cvShowImage(<span class="string">"it"</span>, it);</span><br><span class="line"></span><br><span class="line">	iat = cvCreateImage(cvGetSize(gray), gray-&gt;depth, gray-&gt;nChannels);</span><br><span class="line">	cvAdaptiveThreshold(gray, iat, <span class="number">255</span>, CV_THRESH_BINARY);</span><br><span class="line">	cvNamedWindow(<span class="string">"iat"</span>, <span class="number">1</span>);</span><br><span class="line">	cvShowImage(<span class="string">"iat"</span>, iat);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>效果图1：<br><img src="http://7xjnnt.com1.z0.glb.clouddn.com/12.jpg" alt="二值化图1"><br>效果图2：<br><img src="http://7xjnnt.com1.z0.glb.clouddn.com/123.jpg" alt="二值化图2"><br>采用了两幅图，当背景简单时候，采用单一阈值100的效果明显要好一些，把背景和Data Matrix区域完全分开了，自适应阈值只把边缘找了出来；但是当遇到复杂背景时候，单一阈值完全无法达到目的，Data Matrix区域被抹掉了。<br>也许总能够找到一个恰当的单一阈值来分割目标区域，但自适应阈值的普适性更强，所以项目中最好还是采用自适应阈值。</p>
+<h2 id="4-形态学操作">4.形态学操作</h2><p>形态学操作能实现多种功能：例如消除噪声、分割出独立的图像元素以及在图像中连接相邻的元素。形态学也常常被用于寻找图像中的明显的极大值区域或极小值区域以及求图像的梯度。<br>Data Matrix是一个正方形的码，我们可以通过形态学操作来进一步去除噪声，找出疑似Data Matrix连通区域，之后只需在疑似区域内进行更精确的匹配，能够降低后面的计算难度。<br>OpenCV提供两种基本的形态学操作：腐蚀和膨胀；还有五种基于腐蚀膨胀的形态学操作。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//腐蚀</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">cvErode</span><span class="params">(IplImage* src, IplImage* dst, IplConvKernel* B = NULL, <span class="keyword">int</span> interations = 1)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//膨胀</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">cvDilate</span><span class="params">(IplImage* src, IplImage* dst, IplConvKernel* B = NULL, <span class="keyword">int</span> interations = 1)</span></span>;</span><br></pre></td></tr></table></figure></p>
+<p>前两个参数为输入和输出图像；第三个参数指示卷积的核；interations表示操作迭代的次数。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span> "stdafx.h"</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;cv.h&gt;</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;highgui.h&gt;</span></span><br><span class="line"></span><br><span class="line">IplImage* src;</span><br><span class="line">IplImage* gray;</span><br><span class="line">IplImage* it;</span><br><span class="line">IplImage* erode;</span><br><span class="line">IplImage* dilate;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">morphlogy</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</span><br><span class="line">	src = cvLoadImage(<span class="string">"F:\\opencv_pic\\datamatrix8.png"</span>, <span class="number">1</span>);</span><br><span class="line">	<span class="keyword">if</span> (src == <span class="number">0</span>) &#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"Can't load the data matrix image!"</span>);</span><br><span class="line">		<span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	cvNamedWindow(<span class="string">"src"</span>, <span class="number">1</span>);</span><br><span class="line">	cvShowImage(<span class="string">"src"</span>, src);</span><br><span class="line"></span><br><span class="line">	gray = cvCreateImage(CvSize(src-&gt;width, src-&gt;height), src-&gt;depth, <span class="number">1</span>);</span><br><span class="line">	cvCvtColor(src, gray, CV_BGR2GRAY);</span><br><span class="line">	it = cvCreateImage(cvGetSize(gray), gray-&gt;depth, gray-&gt;nChannels);</span><br><span class="line">	cvThreshold(gray, it, <span class="number">100</span>, <span class="number">255</span>, CV_THRESH_BINARY);</span><br><span class="line">	morphlogy()；</span><br><span class="line">	cvWaitKey(<span class="number">0</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">morphlogy</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="comment">//为了更明显的体现效果，将核的尺寸设置的很大（21*21）</span></span><br><span class="line">	IplConvKernel* kernel = cvCreateStructuringElementEx(<span class="number">21</span>, <span class="number">21</span>, <span class="number">0</span>, <span class="number">0</span>, CV_SHAPE_RECT);</span><br><span class="line"></span><br><span class="line">	erode = cvCreateImage(cvGetSize(it), it-&gt;depth, it-&gt;nChannels);</span><br><span class="line">	cvErode(it, erode, kernel, <span class="number">1</span>);</span><br><span class="line">	cvNamedWindow(<span class="string">"erode"</span>, <span class="number">1</span>);</span><br><span class="line">	cvShowImage(<span class="string">"erode"</span>, erode);</span><br><span class="line"></span><br><span class="line">	dilate = cvCreateImage(cvGetSize(it), it-&gt;depth, it-&gt;nChannels);</span><br><span class="line">	cvDilate(it, dilate, kernel, <span class="number">1</span>);</span><br><span class="line">	cvNamedWindow(<span class="string">"dilate"</span>, <span class="number">1</span>);</span><br><span class="line">	cvShowImage(<span class="string">"dilate"</span>, dilate);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>效果图：<br><img src="http://7xjnnt.com1.z0.glb.clouddn.com/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20160122172612_%E5%89%AF%E6%9C%AC.png" alt="腐蚀膨胀"><br>需要注意的是，膨胀和腐蚀都是针对图像中的亮区域，所以看到腐蚀使得亮的区域逐渐缩小，黑色的Data Matrix区域连成一片。<br>经过这样的操作，就能很容易的找到图中近似正方形区域，进而筛选出Data Matrix的疑似区域。然而，在实际场景中，很难通过这两个简单的操作找出合适的区域。我这里选用的图像是没有复杂背景的图片，下一篇中，将会介绍其他更为实用的形态学操作。</p>
+<h1 id="三、参考文献">三、参考文献</h1><p><a href="http://www.ruanyifeng.com/blog/2012/11/gaussian_blur.html" target="_blank" rel="external">阮一峰博客</a><br>《学习OpenCV》<br>DataMatrix二维条码图像识别的算法研究与实现，李雅静，硕士论文</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/01/18/OpenCVTrackbar/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">学习OpenCV：Trackbar的几种用法</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="OpenCVfindDataMatrix" data-title="学习OpenCV：寻找图像中的Data Matrix区域（1）" data-url="http://ningquec.github.io/2016/01/19/OpenCVfindDataMatrix/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 Tyrone
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/mobile.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+<! -- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+  </div>
+</body>
+</html>
