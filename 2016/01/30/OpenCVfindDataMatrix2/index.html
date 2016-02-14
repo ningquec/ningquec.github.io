@@ -4,17 +4,24 @@
   <meta charset="utf-8">
   <meta name="baidu-site-verification" content="jdIa3b5GkY" />
   
-  <title>Tyrone Li的博客</title>
+  <title>学习OpenCV：寻找图像中的Data Matrix区域（2） | Tyrone Li的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Tyrone Li的博客">
-<meta property="og:url" content="http://ningquec.github.io/index.html">
+  <meta name="description" content="一、简介上篇中简单介绍了膨胀腐蚀两种基本的形态学操作，这两种操作可以很好的对二值化图像起作用。然而，在处理灰度或者彩色图像时，往往需要更加通用的形态学操作。下面这五种操作都基于膨胀腐蚀进行。
+操作名称形态学操作是否需要临时图像CV_MOP_OPEN开运算否CV_MOP_CLOSE闭运算否CV_MOP_GRADIENT形态学梯度是CV_MOP_TOPHAT礼帽原地操作需要CV_MOP_BLACKHA">
+<meta property="og:type" content="article">
+<meta property="og:title" content="学习OpenCV：寻找图像中的Data Matrix区域（2）">
+<meta property="og:url" content="http://ningquec.github.io/2016/01/30/OpenCVfindDataMatrix2/index.html">
 <meta property="og:site_name" content="Tyrone Li的博客">
-<meta property="og:description">
+<meta property="og:description" content="一、简介上篇中简单介绍了膨胀腐蚀两种基本的形态学操作，这两种操作可以很好的对二值化图像起作用。然而，在处理灰度或者彩色图像时，往往需要更加通用的形态学操作。下面这五种操作都基于膨胀腐蚀进行。
+操作名称形态学操作是否需要临时图像CV_MOP_OPEN开运算否CV_MOP_CLOSE闭运算否CV_MOP_GRADIENT形态学梯度是CV_MOP_TOPHAT礼帽原地操作需要CV_MOP_BLACKHA">
+<meta property="og:image" content="http://7xjnnt.com1.z0.glb.clouddn.com/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20160214115457.png">
+<meta property="og:image" content="http://7xjnnt.com1.z0.glb.clouddn.com/initpintu_%E5%89%AF%E6%9C%AC.jpg">
+<meta property="og:image" content="http://7xjnnt.com1.z0.glb.clouddn.com/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20160214114924.png">
+<meta property="og:updated_time" content="2016-02-14T03:58:28.163Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Tyrone Li的博客">
-<meta name="twitter:description">
+<meta name="twitter:title" content="学习OpenCV：寻找图像中的Data Matrix区域（2）">
+<meta name="twitter:description" content="一、简介上篇中简单介绍了膨胀腐蚀两种基本的形态学操作，这两种操作可以很好的对二值化图像起作用。然而，在处理灰度或者彩色图像时，往往需要更加通用的形态学操作。下面这五种操作都基于膨胀腐蚀进行。
+操作名称形态学操作是否需要临时图像CV_MOP_OPEN开运算否CV_MOP_CLOSE闭运算否CV_MOP_GRADIENT形态学梯度是CV_MOP_TOPHAT礼帽原地操作需要CV_MOP_BLACKHA">
   
   
     <link rel="icon" href="/favicon.png">
@@ -159,9 +166,7 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap">
-  
-    <article id="post-OpenCVfindDataMatrix2" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-OpenCVfindDataMatrix2" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2016/01/30/OpenCVfindDataMatrix2/" class="article-date">
@@ -177,12 +182,23 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/01/30/OpenCVfindDataMatrix2/">学习OpenCV：寻找图像中的Data Matrix区域（2）</a>
+    <h1 class="article-title" itemprop="name">
+      学习OpenCV：寻找图像中的Data Matrix区域（2）
     </h1>
   
 
       </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenCV/">OpenCV</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
       
     
     <div class="article-entry" itemprop="articleBody">
@@ -203,424 +219,61 @@
       
     </div>
     
-    <div class="article-info article-info-index">
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenCV/">OpenCV</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/01/19/OpenCVfindDataMatrix/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">学习OpenCV：寻找图像中的Data Matrix区域（1）</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
   
 </article>
 
 
-
-
-
-
-  
-    <article id="post-OpenCVfindDataMatrix" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/01/19/OpenCVfindDataMatrix/" class="article-date">
-  	<time datetime="2016-01-19T07:23:32.000Z" itemprop="datePublished">2016-01-19</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/01/19/OpenCVfindDataMatrix/">学习OpenCV：寻找图像中的Data Matrix区域（1）</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="一、简介">一、简介</h1><p>Data Matrix是二维码的一种，最大特点就是密度高，其最小尺寸是目前所有条码中最小的。Data Matrix码不同于QR码，由寻边区和数据区组成。<br><img src="http://7xjnnt.com1.z0.glb.clouddn.com/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20160119174505.png" alt="Data Matrix"><br>这里不对编码具体的细节作介绍，目的主要是根据Data Matrix的特点（“L型”边界）来寻找图像中的疑似Data Matrix区域，这需要很多图像处理算法的结合。<br>图像处理有一个很重要的特征：受到实际情况的影响非常大，同样的算法，可能换个场景就完全失效了。所以，本文就从探索的过程谈起，说一下OpenCV的常见处理算法。<br>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenCV/">OpenCV</a></li></ul>
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
 	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2016/01/19/OpenCVfindDataMatrix/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
 
 
 
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="OpenCVfindDataMatrix2" data-title="学习OpenCV：寻找图像中的Data Matrix区域（2）" data-url="http://ningquec.github.io/2016/01/30/OpenCVfindDataMatrix2/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
 
 
 
-  
-    <article id="post-OpenCVTrackbar" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/01/18/OpenCVTrackbar/" class="article-date">
-  	<time datetime="2016-01-18T07:07:28.000Z" itemprop="datePublished">2016-01-18</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/01/18/OpenCVTrackbar/">学习OpenCV：Trackbar的几种用法</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="一、简介">一、简介</h1><p>Highgui包为我们提供了trackbar（滑动条）的实现，利用它我们可以作很多事情。比如视频的拖放、动态传入参数等等。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cvCreateTrackbar(</span><br><span class="line">	<span class="keyword">const</span> <span class="keyword">char</span>* trackbar_name, </span><br><span class="line">	<span class="keyword">const</span> <span class="keyword">char</span>* window_name,</span><br><span class="line">    <span class="keyword">int</span>* value, </span><br><span class="line">    <span class="keyword">int</span> count, </span><br><span class="line">    <span class="function">CvTrackbarCallback on_change <span class="title">CV_DEFAULT</span><span class="params">(NULL)</span></span><br><span class="line">)</span></span><br></pre></td></tr></table></figure></p>
-<ul>
-<li>第一个参数：滑动条名称；</li>
-<li>第二个参数：窗口名称；</li>
-<li>第三个参数：滑动条的位置所代表的值；</li>
-<li>第四个参数：滑动条的最大值；</li>
-<li>第五个参数：回调函数。</li>
-</ul>
-<h1 id="二、trackbar的几种用法">二、trackbar的几种用法</h1>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenCV/">OpenCV</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2016/01/18/OpenCVTrackbar/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
-    <article id="post-IplImageStructure" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/01/15/IplImageStructure/" class="article-date">
-  	<time datetime="2016-01-15T08:27:29.000Z" itemprop="datePublished">2016-01-15</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/01/15/IplImageStructure/">学习OpenCV：IplImage数据结构和ROI应用</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="一、前言">一、前言</h1><p>开始学习OpenCV，毕设和工作都要接触。希望能借此机会复习一下数学和C语言。另外插一句：</p>
-<blockquote>
-<p>大学课程无论看起来多么无用，以后都会是工作实践里的基石。</p>
-</blockquote>
-<h1 id="二、OpenCV第一课：基本数据类型">二、OpenCV第一课：基本数据类型</h1><p>略去了OpenCV的安装过程，推荐浅墨博客。这里主要讲解OpenCV的常见数据结构。<br>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenCV/">OpenCV</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2016/01/15/IplImageStructure/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
-    <article id="post-FirstAndroidProblem" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/01/13/FirstAndroidProblem/" class="article-date">
-  	<time datetime="2016-01-13T06:09:57.000Z" itemprop="datePublished">2016-01-13</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/01/13/FirstAndroidProblem/">Android Studio安装的几个坑</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一、前言">一、前言</h2><p>毕设题目是做一个基于Android的字符识别。作为一个有Java基础（擅长hello world）的程序员，自下载Android Studio遭遇无数个坑，这里做一下记录。</p>
-<h2 id="二、坑">二、坑</h2><ol>
-<li>下载安装包看清楚自己需要的<br>官方的安装包都在墙外，下载速度不能保证，推荐网盘搜索~<br>还可以看<a href="https://github.com/inferjay/AndroidDevTools" target="_blank" rel="external">这里</a>。</li>
-<li><p>提示未安装build-tool-21.1.1<br><strong>解决办法：</strong></p>
-<ul>
-<li>下载<a href="http://dl-ssl.google.com/android/repository/build-tools_r21.1.1-windows.zip" target="_blank" rel="external">build-tools21.1.1（墙外）</a>，不能翻墙的就自己搜一下吧。</li>
-<li>C:\Users\&lt;用户名&gt;\AppData\Local\Android\sdk\build-tools，在本路径下建立新的文件夹：21.1.1。</li>
-<li>下载build-tools21.1.1解压，把文件夹中所有东西拷贝到21.1.1下。</li>
-<li>重启Android Studio。</li>
-</ul>
-</li>
-<li><p>运行APP出现：HAX is not working and emulator runs in emulation mode<br>安装HAXM时候设置的内存小于你AVD的内存，可能就会报这样的错误。<br><strong>解决办法：</strong></p>
-<ul>
-<li>调低AVD的内存，比如768M。</li>
-<li>重新安装HAXM，在<a href="https://software.intel.com/en-us/android/articles/intel-hardware-accelerated-execution-manager" target="_blank" rel="external">这儿</a>下载。<ul>
-<li>卸载原来的HAXM：控制面板-&gt;卸载Intel® Hardware Accelerated Execution Manager。</li>
-<li>安装下载的安装包，选择合适的内存。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
-    <article id="post-QuickSort" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/08/20/QuickSort/" class="article-date">
-  	<time datetime="2015-08-20T12:29:47.000Z" itemprop="datePublished">2015-08-20</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/08/20/QuickSort/">快速排序的两种方法（java &amp; Go实现）</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>快速排序的基本思想就是分治：</p>
-<ol>
-<li>选择一个基准数字</li>
-<li>将数组中比基准数字小的放在基准数字左边，大的放在右边</li>
-<li>对基准数字分成的两个区域重复第二步，直至每个区间只有一个数</li>
-</ol>
-<p>所以快速排序的平均时间复杂度为O(nlog_2n)。n是每一趟复杂度，log_2n则是分区的次数。下面两种方法都遵循分治的基本思想，所不同的只是分区的方法。</p>
-<p>一、挖坑法<br>如图，每一趟排序的原理如下：</p>
-<ol>
-<li>把最左边的元素作为基准数字（也可以任意选择），储存在temp中，作为第一个“坑”</li>
-<li>i引用自区域最左边始，j引用自区域最右边始</li>
-<li>j从右向左遍历，当遇到比基准数字小的数字时，填入“坑”，原地形成一个“坑”</li>
-<li>i从左向右遍历，当遇到比基准数字大的数字时，填入“坑”，原地形成一个“坑”</li>
-<li>重复3,4步，直到i=j时候停下</li>
-<li>将基准数字放入i位置的“坑”中</li>
-</ol>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Go/">Go</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构/">数据结构</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/08/20/QuickSort/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
-    <article id="post-ServletDay1" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/08/09/ServletDay1/" class="article-date">
-  	<time datetime="2015-08-09T14:05:36.000Z" itemprop="datePublished">2015-08-09</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/08/09/ServletDay1/">Servlet学习笔记（一）</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一、servlet简介">一、servlet简介</h2><p>Servlet是Sun公司提供的一门用于开发动态web资源的技术。Servlet接受并且响应从客户端发送的请求，一般遵循http协议。<br>编写一个servlet的方法很简单：</p>
-<ul>
-<li>编写一个java类，实现servlet接口</li>
-<li>把开发好的java类部署到web服务器中</li>
-</ul>
-<p>servlet接口定义了一系列方法来进行：初始化servlet，响应请求、 从服务器移除servlet。<br>这些方法是生命周期相关的方法（life-cycle methods），并且按照以下顺序执行。</p>
-<ol>
-<li>servlet被创建时，调用初始化方法。init()</li>
-<li>客户端发出请求时，响应请求方法就被执行。service()</li>
-<li>servlet从服务器移除之时，调用移除的方法。 destroy()</li>
-</ol>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaWeb/">JavaWeb</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Servlet/">Servlet</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/08/09/ServletDay1/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
-  
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
-    </nav>
-  
 </div>
       <footer id="footer">
   <div class="outer">
