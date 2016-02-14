@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://ningquec.github.io/2016/02/14/BasicOCRInOpenCV/</loc>
+    <lastmod>2016-02-14T12:14:58.665Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://ningquec.github.io/2016/01/30/OpenCVfindDataMatrix2/</loc>
     <lastmod>2016-02-14T04:04:36.064Z</lastmod>
   </url>

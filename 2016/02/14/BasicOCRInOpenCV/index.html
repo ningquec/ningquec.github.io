@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="baidu-site-verification" content="jdIa3b5GkY" />
+  
+  <title>使用OpenCV开发简单的OCR系统 | Tyrone Li的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="一、简介OCR（光学字符识别）是现在比较成熟的技术，是指电子设备（例如扫描仪或数码相机）检查纸（或者器具）上打印的字符通过检测暗、亮的模式确定其形状。然后用字符识别方法将形状翻译成计算机文字的过程：即对文本资料进行扫描，然后对图像文件进行分析处理、获取文字及版面信息的过程。现在市面上的产品主要有小猿搜题、学习宝、CAJajViewer等，识别率能达到较高水平。原理一般都是卷积神经网络等机器学习方法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用OpenCV开发简单的OCR系统">
+<meta property="og:url" content="http://ningquec.github.io/2016/02/14/BasicOCRInOpenCV/index.html">
+<meta property="og:site_name" content="Tyrone Li的博客">
+<meta property="og:description" content="一、简介OCR（光学字符识别）是现在比较成熟的技术，是指电子设备（例如扫描仪或数码相机）检查纸（或者器具）上打印的字符通过检测暗、亮的模式确定其形状。然后用字符识别方法将形状翻译成计算机文字的过程：即对文本资料进行扫描，然后对图像文件进行分析处理、获取文字及版面信息的过程。现在市面上的产品主要有小猿搜题、学习宝、CAJajViewer等，识别率能达到较高水平。原理一般都是卷积神经网络等机器学习方法">
+<meta property="og:updated_time" content="2016-02-14T12:14:58.665Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用OpenCV开发简单的OCR系统">
+<meta name="twitter:description" content="一、简介OCR（光学字符识别）是现在比较成熟的技术，是指电子设备（例如扫描仪或数码相机）检查纸（或者器具）上打印的字符通过检测暗、亮的模式确定其形状。然后用字符识别方法将形状翻译成计算机文字的过程：即对文本资料进行扫描，然后对图像文件进行分析处理、获取文字及版面信息的过程。现在市面上的产品主要有小猿搜题、学习宝、CAJajViewer等，识别率能达到较高水平。原理一般都是卷积神经网络等机器学习方法">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img lazy-src="http://7xjnnt.com1.z0.glb.clouddn.com/tyrone博客头像.png" class="js-avatar">
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Tyrone</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">天天向上</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="http://github.com/ningquec" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/C/" style="font-size: 16.67px;">C</a> <a href="/tags/Go/" style="font-size: 10px;">Go</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/JavaWeb/" style="font-size: 11.67px;">JavaWeb</a> <a href="/tags/Linux/" style="font-size: 18.33px;">Linux</a> <a href="/tags/OCR/" style="font-size: 10px;">OCR</a> <a href="/tags/OpenCV/" style="font-size: 16.67px;">OpenCV</a> <a href="/tags/Servlet/" style="font-size: 10px;">Servlet</a> <a href="/tags/数据结构/" style="font-size: 15px;">数据结构</a> <a href="/tags/树/" style="font-size: 13.33px;">树</a> <a href="/tags/正则表达式/" style="font-size: 11.67px;">正则表达式</a> <a href="/tags/集合类/" style="font-size: 11.67px;">集合类</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">天天向上</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Tyrone</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="http://7xjnnt.com1.z0.glb.clouddn.com/tyrone博客头像.png" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Tyrone</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">天天向上</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="http://github.com/ningquec" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-BasicOCRInOpenCV" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/02/14/BasicOCRInOpenCV/" class="article-date">
+  	<time datetime="2016-02-14T08:29:14.000Z" itemprop="datePublished">2016-02-14</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      使用OpenCV开发简单的OCR系统
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OCR/">OCR</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenCV/">OpenCV</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="一、简介">一、简介</h1><p>OCR（光学字符识别）是现在比较成熟的技术，是指电子设备（例如扫描仪或数码相机）检查纸（或者器具）上打印的字符通过检测暗、亮的模式确定其形状。然后用字符识别方法将形状翻译成计算机文字的过程：即对文本资料进行扫描，然后对图像文件进行分析处理、获取文字及版面信息的过程。<br>现在市面上的产品主要有小猿搜题、学习宝、CAJajViewer等，识别率能达到<a href="https://www.zhihu.com/topic/19574441/top-answers" target="_blank" rel="external">较高水平</a>。原理一般都是卷积神经网络等机器学习方法，结合多种图像处理技术。<br>本篇文章主要译自<a href="http://blog.damiles.com/2008/11/basic-ocr-in-opencv/" target="_blank" rel="external">DAMILES的博客</a>，其中采用<a href="https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm" target="_blank" rel="external">KNN（K-Nearest Neighbor）算法</a>来识别手写数字，识别率肯定大大不如卷积神经网络，旨在介绍OpenCV中machine learning模块的简单应用。<br><a id="more"></a></p>
+<h1 id="二、正文">二、正文</h1><p>在这篇教程中，我们将要创建一个基本的数字OCR，它能将手写数字分类识别出来。</p>
+<p>为了完成这个OCR，我们需要用到前面一些教程的知识，包括<a href="http://blog.damiles.com/2008/11/basic-painter-in-opencv/" target="_blank" rel="external">basic painter</a>和<a href="http://blog.damiles.com/2008/11/the-basic-patter-recognition-and-classification-with-opencv/" target="_blank" rel="external">the basic pattern recognition and classification with openCV</a>教程。</p>
+<p>一个典型的模式识别分类器由3部分组成：<br><img src="" alt="模式识别分类器"><br>Preprocessing（预处理）：我们在这个模块中处理输入的图像，比如尺寸归一化、转换颜色空间等；<br>Feature extraction（特征提取）：在这个模块中，我们将图像处理为一个用于分类的特征向量，向量可以由像素矩阵拉伸而成，也可以用图像轮廓的链码数据表示。<br>Classification（分类）：在这个模块中有两个功能。其一，用获取的特征向量集训练模型；其二，用训练好的模型去分类输入的特征向量。训练方法采用KNN。</p>
+<p>这个基本的OCR流程图如下：<br><img src="" alt="OCR流程图"><br>从哪里获取训练和测试数字图像用于训练和测试分类器模型（KNN）：<br>我们有1000张手写数字图像，每个数字有100张。从每个数字的100张中选取50张作为训练集，其它用作测试集。<br><img src="" alt="手写数字"></p>
+<p>接下来的第一件事就是对所有的训练集进行预处理，我们会创建一个预处理函数。这个函数的输入参数为手写数字图像、处理结果图像的width和height，返回值为归一化尺寸且包含边界框的手写数字图像，下图更清楚的显示了预处理过程：<br><img src="" alt="预处理图示"></p>
+<p>预处理代码：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">findX</span><span class="params">(IplImage* imgSrc,<span class="keyword">int</span>* min, <span class="keyword">int</span>* max)</span></span>&#123;</span><br><span class="line">	<span class="comment">//找到X方向上的边界</span></span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	<span class="keyword">int</span> minFound=<span class="number">0</span>;</span><br><span class="line">	CvMat data;</span><br><span class="line">	CvScalar maxVal=cvRealScalar(imgSrc-&gt;width * <span class="number">255</span>);</span><br><span class="line">	CvScalar val=cvRealScalar(<span class="number">0</span>);</span><br><span class="line">	<span class="keyword">for</span> (i=<span class="number">0</span>; i&lt; imgSrc-&gt;width; i++)&#123;</span><br><span class="line">		cvGetCol(imgSrc, &amp;data, i);</span><br><span class="line">		val= cvSum(&amp;data);</span><br><span class="line">		<span class="keyword">if</span>(val.val[<span class="number">0</span>] &lt; maxVal.val[<span class="number">0</span>])&#123;</span><br><span class="line">			*max= i;</span><br><span class="line">			<span class="keyword">if</span>(!minFound)&#123;</span><br><span class="line">				*min= i;</span><br><span class="line">				minFound= <span class="number">1</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">findY</span><span class="params">(IplImage* imgSrc,<span class="keyword">int</span>* min, <span class="keyword">int</span>* max)</span></span>&#123;</span><br><span class="line">	<span class="comment">//找到Y方向上的边界</span></span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	<span class="keyword">int</span> minFound=<span class="number">0</span>;</span><br><span class="line">	CvMat data;</span><br><span class="line">	CvScalar maxVal=cvRealScalar(imgSrc-&gt;width * <span class="number">255</span>);</span><br><span class="line">	CvScalar val=cvRealScalar(<span class="number">0</span>);</span><br><span class="line">	<span class="comment">//For each col sum, if sum &lt; width*255 then we find the min</span></span><br><span class="line">	<span class="comment">//then continue to end to search the max, if sum&lt; width*255 then is new max</span></span><br><span class="line">	<span class="keyword">for</span> (i=<span class="number">0</span>; i&lt; imgSrc-&gt;height; i++)&#123;</span><br><span class="line">		cvGetRow(imgSrc, &amp;data, i);</span><br><span class="line">		val= cvSum(&amp;data);</span><br><span class="line">		<span class="keyword">if</span>(val.val[<span class="number">0</span>] &lt; maxVal.val[<span class="number">0</span>])&#123;</span><br><span class="line">			*max=i;</span><br><span class="line">			<span class="keyword">if</span>(!minFound)&#123;</span><br><span class="line">				*min= i;</span><br><span class="line">				minFound= <span class="number">1</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">CvRect <span class="title">findBB</span><span class="params">(IplImage* imgSrc)</span></span>&#123;</span><br><span class="line">	<span class="comment">//获得数字的边界框</span></span><br><span class="line">	CvRect aux;</span><br><span class="line">	<span class="keyword">int</span> xmin, xmax, ymin, ymax;</span><br><span class="line">	xmin=xmax=ymin=ymax=<span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">	findX(imgSrc, &amp;xmin, &amp;xmax);</span><br><span class="line">	findY(imgSrc, &amp;ymin, &amp;ymax);</span><br><span class="line"></span><br><span class="line">	aux=cvRect(xmin, ymin, xmax-xmin, ymax-ymin);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> aux;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">IplImage <span class="title">preprocessing</span><span class="params">(IplImage* imgSrc,<span class="keyword">int</span> new_width, <span class="keyword">int</span> new_height)</span></span>&#123;</span><br><span class="line">	IplImage* result;</span><br><span class="line">	IplImage* scaledResult;</span><br><span class="line"></span><br><span class="line">	CvMat data;</span><br><span class="line">	CvMat dataA;</span><br><span class="line">	CvRect bb;         <span class="comment">//边界框</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">//找到边界框</span></span><br><span class="line">	bb=findBB(imgSrc);</span><br><span class="line"></span><br><span class="line">	<span class="comment">//在图像中获取边界框区域</span></span><br><span class="line">	cvGetSubRect(imgSrc, &amp;data, cvRect(bb.x, bb.y, bb.width, bb.height));</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//将边界框的边长设为height和width中的较大值，转变为正方形</span></span><br><span class="line">	<span class="keyword">int</span> size=(bb.width&gt;bb.height)?bb.width:bb.height;</span><br><span class="line">	result=cvCreateImage( cvSize( size, size ), <span class="number">8</span>, <span class="number">1</span> );</span><br><span class="line">	cvSet(result,CV_RGB(<span class="number">255</span>,<span class="number">255</span>,<span class="number">255</span>),NULL);</span><br><span class="line">	<span class="comment">//Copy de data in center of image</span></span><br><span class="line">	<span class="keyword">int</span> x=(<span class="keyword">int</span>)<span class="built_in">floor</span>((<span class="keyword">float</span>)(size-bb.width)/<span class="number">2.0f</span>);</span><br><span class="line">	<span class="keyword">int</span> y=(<span class="keyword">int</span>)<span class="built_in">floor</span>((<span class="keyword">float</span>)(size-bb.height)/<span class="number">2.0f</span>);</span><br><span class="line">	cvGetSubRect(result, &amp;dataA, cvRect(x,y,bb.width, bb.height));</span><br><span class="line">	cvCopy(&amp;data, &amp;dataA, NULL);</span><br><span class="line">	<span class="comment">//Scale result</span></span><br><span class="line">	scaledResult=cvCreateImage( cvSize( new_width, new_height ), <span class="number">8</span>, <span class="number">1</span> );</span><br><span class="line">	cvResize(result, scaledResult, CV_INTER_NN);</span><br><span class="line"></span><br><span class="line">	<span class="comment">//Return processed data</span></span><br><span class="line">	<span class="keyword">return</span> *scaledResult;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>我们使用basicOCR类中的函数getData来获取训练数据和数据的类别。getData函数会读取所有在OCR文件夹下的训练数据，该文件夹下为每一个数字（类别）创建了一个文件夹，每一个文件夹内存放训练用的pbm文件，文件名形如：cnn.pbm，c代表该数字（0-9），nn表示手写数字图像的编号（00-99）。</p>
+<p>获取到的每一幅图像都要经过预处理，并且把图像数据转换为特征向量。</p>
+<p>getData函数代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> basicOCR::getData()&#123;</span><br><span class="line">	IplImage* src_image;</span><br><span class="line">	IplImage prs_image;</span><br><span class="line">	CvMat row,data;</span><br><span class="line">	<span class="keyword">char</span> file[<span class="number">255</span>];</span><br><span class="line">	<span class="keyword">int</span> i,j;</span><br><span class="line">	<span class="keyword">for</span>(i =<span class="number">0</span>; i &lt; classes; i++)&#123;</span><br><span class="line">		<span class="keyword">for</span>( j = <span class="number">0</span>; j&lt; train_samples; j++)&#123;</span><br><span class="line"></span><br><span class="line">		<span class="comment">//Load file</span></span><br><span class="line">		<span class="keyword">if</span>(j&lt;<span class="number">10</span>)</span><br><span class="line">			<span class="built_in">sprintf</span>(file,<span class="string">"%s%d/%d0%d.pbm"</span>,file_path, i, i , j);</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">			<span class="built_in">sprintf</span>(file,<span class="string">"%s%d/%d%d.pbm"</span>,file_path, i, i , j);</span><br><span class="line">		src_image = cvLoadImage(file,<span class="number">0</span>);</span><br><span class="line">		<span class="keyword">if</span>(!src_image)&#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"Error: Cant load image %s\n"</span>, file);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">//process file</span></span><br><span class="line">		prs_image = preprocessing(src_image, size, size);</span><br><span class="line"></span><br><span class="line">		<span class="comment">//Set class label</span></span><br><span class="line">		cvGetRow(trainClasses, &amp;row, i*train_samples + j);</span><br><span class="line">		cvSet(&amp;row, cvRealScalar(i));</span><br><span class="line">		<span class="comment">//Set data</span></span><br><span class="line">		cvGetRow(trainData, &amp;row, i*train_samples + j);</span><br><span class="line"></span><br><span class="line">		IplImage* img = cvCreateImage( cvSize( size, size ), IPL_DEPTH_32F, <span class="number">1</span> );</span><br><span class="line">		<span class="comment">//convert 8 bits image to 32 float image</span></span><br><span class="line">		cvConvertScale(&amp;prs_image, img, <span class="number">0.0039215</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">		cvGetSubRect(img, &amp;data, cvRect(<span class="number">0</span>,<span class="number">0</span>, size,size));</span><br><span class="line"></span><br><span class="line">		CvMat row_header, *row1;</span><br><span class="line">		<span class="comment">//convert data matrix sizexsize to vecor</span></span><br><span class="line">		row1 = cvReshape( &amp;data, &amp;row_header, <span class="number">0</span>, <span class="number">1</span> );</span><br><span class="line">		cvCopy(row1, &amp;row, NULL);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>经过获取数据并对其预处理之后，我们用这些处理过的数据训练模型，在这个例子中使用KNN算法：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">knn=<span class="keyword">new</span> CvKNearest( trainData, trainClasses, <span class="number">0</span>, <span class="keyword">false</span>, K );</span><br><span class="line"></span><br><span class="line"><span class="comment">//函数原型</span></span><br><span class="line">CvKNearest::CvKNearest(</span><br><span class="line">			CvMat* trainData, </span><br><span class="line">			<span class="keyword">const</span> CvMat* responses, </span><br><span class="line">			<span class="keyword">const</span> CvMat* sampleIdx=<span class="number">0</span>, </span><br><span class="line">			<span class="keyword">bool</span> isRegression=<span class="keyword">false</span>, </span><br><span class="line">			<span class="keyword">int</span> max_k=<span class="number">32</span> )</span><br></pre></td></tr></table></figure></p>
+<p>接下来我们可以测试这个训练好的模型了，可以用测试的结果去和采用其他机器学习方法的结果比较，也可以比较更改训练图像的尺寸的结果。下面这个函数basicOCR::test()用来测试。这个函数获取剩下的500张测试图像，使用KNN将其分类，并查看返回的结果。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> basicOCR::test()&#123;</span><br><span class="line">	IplImage* src_image;</span><br><span class="line">	IplImage prs_image;</span><br><span class="line">	CvMat row,data;</span><br><span class="line">	<span class="keyword">char</span> file[<span class="number">255</span>];</span><br><span class="line">	<span class="keyword">int</span> i,j;</span><br><span class="line">	<span class="keyword">int</span> error=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> testCount=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(i =<span class="number">0</span>; i &lt; classes; i++)&#123;</span><br><span class="line">		<span class="keyword">for</span>( j = <span class="number">50</span>; j&lt; <span class="number">50</span>+train_samples; j++)&#123;</span><br><span class="line"></span><br><span class="line">			<span class="built_in">sprintf</span>(file,<span class="string">"%s%d/%d%d.pbm"</span>,file_path, i, i , j);</span><br><span class="line">			src_image = cvLoadImage(file,<span class="number">0</span>);</span><br><span class="line">			<span class="keyword">if</span>(!src_image)&#123;</span><br><span class="line">				<span class="built_in">printf</span>(<span class="string">"Error: Cant load image %s\n"</span>, file);</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="comment">//process file</span></span><br><span class="line">			prs_image = preprocessing(src_image, size, size);</span><br><span class="line">			<span class="keyword">float</span> r=classify(&amp;prs_image,<span class="number">0</span>);</span><br><span class="line">			<span class="keyword">if</span>((<span class="keyword">int</span>)r!=i)</span><br><span class="line">			error++;</span><br><span class="line"></span><br><span class="line">			testCount++;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">float</span> totalerror=<span class="number">100</span>*(<span class="keyword">float</span>)error/(<span class="keyword">float</span>)testCount;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"System Error: %.2f%%\n"</span>, totalerror);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>test函数调用了classify函数来分类图像、处理图像、获取特征向量，以及将特征向量分入某个类别（KNN方法），代码如下：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">float</span> basicOCR::classify(IplImage* img, <span class="keyword">int</span> showResult)&#123;</span><br><span class="line">	IplImage prs_image;</span><br><span class="line">	CvMat data;</span><br><span class="line">	CvMat* nearest=cvCreateMat(<span class="number">1</span>,K,CV_32FC1);</span><br><span class="line">	<span class="keyword">float</span> result;</span><br><span class="line">	<span class="comment">//process file</span></span><br><span class="line">	prs_image = preprocessing(img, size, size);</span><br><span class="line"></span><br><span class="line">	<span class="comment">//Set data</span></span><br><span class="line">	IplImage* img32 = cvCreateImage( cvSize( size, size ), IPL_DEPTH_32F, <span class="number">1</span> );</span><br><span class="line">	cvConvertScale(&amp;prs_image, img32, <span class="number">0.0039215</span>, <span class="number">0</span>);</span><br><span class="line">	cvGetSubRect(img32, &amp;data, cvRect(<span class="number">0</span>,<span class="number">0</span>, size,size));</span><br><span class="line">	CvMat row_header, *row1;</span><br><span class="line">	row1 = cvReshape( &amp;data, &amp;row_header, <span class="number">0</span>, <span class="number">1</span> );</span><br><span class="line"></span><br><span class="line">	result=knn-&gt;find_nearest(row1,K,<span class="number">0</span>,<span class="number">0</span>,nearest,<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> accuracy=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;K;i++)&#123;</span><br><span class="line">		<span class="keyword">if</span>( nearest-&gt;data.fl[i] == result)</span><br><span class="line">			accuracy++;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">float</span> pre=<span class="number">100</span>*((<span class="keyword">float</span>)accuracy/(<span class="keyword">float</span>)K);</span><br><span class="line">	<span class="keyword">if</span>(showResult==<span class="number">1</span>)&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"|\t%.0f\t| \t%.2f%%&amp;nbsp; \t| \t%d of %d \t| \n"</span>,result,pre,accuracy,K);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">" ---------------------------------------------------------------\n"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>所有的训练和测试工作都在basicOCR类中进行。创建了basicOCR实例之后，仅需要调用classify函数去分类我们的输入手写数字图像即可。现在我们可以用之前教程<a href="http://blog.damiles.com/2008/11/basic-painter-in-opencv/" target="_blank" rel="external">basic painter</a>去画一个数字图像并且把它分类。<br>项目地址：<a href="https://github.com/damiles/basicOCR" target="_blank" rel="external">托管在github</a>。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/01/30/OpenCVfindDataMatrix2/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">学习OpenCV：寻找图像中的Data Matrix区域（2）</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="BasicOCRInOpenCV" data-title="使用OpenCV开发简单的OCR系统" data-url="http://ningquec.github.io/2016/02/14/BasicOCRInOpenCV/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 Tyrone
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/mobile.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+<! -- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+  </div>
+</body>
+</html>
